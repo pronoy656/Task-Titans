@@ -6,6 +6,7 @@ import Reports from "../components/pages/adminPages/reports/Reports";
 import TermsAndCondition from "../components/pages/adminPages/termsandcondition/TermsAndCondition";
 import PostManagement from "../components/pages/adminPages/postManagement/PostManagement";
 import Notification from "../components/pages/adminPages/notification/Notification";
+import ReportsOverview from "../components/pages/adminPages/reports/ReportsOverview";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/reports",
         element: <Reports/>
+      },
+      {
+        path: "/reports-overview",
+        element: <ReportsOverview></ReportsOverview>
       },
       {
         path: "/terms-and-condition",

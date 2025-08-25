@@ -129,12 +129,12 @@ const Chart = () => {
                   dataKey="month"
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fontSize: 12, fill: "#6B7280" }}
+                  tick={{ fontSize: 14, fill: "#6B7280" }}
                 />
                 <YAxis
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fontSize: 12, fill: "#6B7280" }}
+                  tick={{ fontSize: 14, fill: "#6B7280" }}
                   tickFormatter={(value) => `${value / 1000}k`}
                 />
                 <Tooltip content={<CustomTooltip />} />
