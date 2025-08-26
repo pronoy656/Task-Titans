@@ -1,71 +1,70 @@
-import React from 'react';
-import { DollarSign, Users, FileText, AlertTriangle } from "lucide-react"
+import React, { useState } from 'react';
+import { Button } from '../../../ui/Button';
+import { Textarea } from '../../../ui/Textarea';
+import { CheckCircle, Save } from 'lucide-react';
+
 
 const TermsAndCondition = () => {
-      const metrics = [
-    {
-      title: "Total Revenue",
-      value: "$124,563",
-      change: "+12.5%",
-      changeType: "positive",
-      icon: DollarSign,
-      iconColor: "text-blue-500",
-      iconBg: "bg-blue-50",
-    },
-    {
-      title: "Total Users",
-      value: "8,642",
-      change: "+8.3%",
-      changeType: "positive",
-      icon: Users,
-      iconColor: "text-blue-500",
-      iconBg: "bg-blue-50",
-    },
-    {
-      title: "Total Posts",
-      value: "15,842",
-      change: "+12.5%",
-      changeType: "positive",
-      icon: FileText,
-      iconColor: "text-blue-500",
-      iconBg: "bg-blue-50",
-    },
-    {
-      title: "Total Reports",
-      value: "15,842",
-      change: "-2.1%",
-      changeType: "negative",
-      icon: AlertTriangle,
-      iconColor: "text-blue-500",
-      iconBg: "bg-blue-50",
-    },
-  ]
+
+ const [terms, setTerms] = useState("")
+  const [showSuccess, setShowSuccess] = useState(true)
+  const [lastUpdated] = useState("January 15, 2024")
+
+
+    const handleSave = () => {
+    // Handle save logic here
+    setShowSuccess(true)
+    console.log("Terms saved:", terms)
+  }
+    
     return (
         <div className='admin-page'>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
-      {metrics.map((metric, index) => {
-        const Icon = metric.icon
-        return (
-          <div key={index} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-            <div className="flex items-center justify-between mb-4">
-              <div className={`p-2 rounded-lg ${metric.iconBg}`}>
-                <Icon className={`h-5 w-5 ${metric.iconColor}`} />
-              </div>
-              <span
-                className={`text-sm font-medium ${
-                  metric.changeType === "positive" ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {metric.change}
-              </span>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-gray-600 mb-1">{metric.title}</p>
-              <p className="text-2xl font-bold text-gray-900">{metric.value}</p>
-            </div>
-          </div>
-        )
-      })}
+           <div className="rounded-lg p-2 space-y-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900 mb-3">Manage Terms & Conditions</h1>
+        <p className="text-gray-600 font-normal leading-relaxed">
+          Use this section to write or update the Terms and Conditions for your website. These terms will be displayed
+          to users within the website and must be accepted during registration or major updates.
+        </p>
+      </div>
+
+      {/* Success Alert */}
+      {showSuccess && (
+        <div className="bg-[#DAEEDF] border border-green-200 rounded-lg p-4 flex items-start gap-3">
+          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+          <p className="text-[#00A62C] font-normal">
+            Your Terms & Conditions have been successfully updated and will now appear in the Website.
+          </p>
+        </div>
+      )}
+
+      {/* Editor Section */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold text-gray-900">Terms & Conditions Editor</h2>
+
+        <Textarea
+          placeholder="Write or paste your Terms & Conditions here..."
+          value={terms}
+          onChange={(e) => setTerms(e.target.value)}
+          className="min-h-[300px] resize-none  focus:border-blue-500 focus:ring-blue-500"
+        />
+
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-gray-500">Last Updated On: {lastUpdated}</p>
+        </div>
+      </div>
+
+      {/* Save Button */}
+      <div className="pt-2">
+        <Button
+          onClick={handleSave}
+          className="bg-[#007BFF] hover:bg-blue-700 text-white px-20 py-2.5 rounded-md font-medium flex items-center gap-2"
+        >
+          <Save className="w-4 h-4" />
+          Save
+        </Button>
+      </div>
     </div>
         </div>
     );

@@ -26,7 +26,7 @@ const ReportsOverview = () => {
 
           {/* Stats and Admin Actions Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Left Column - User Stats and Report Details */}
+            {/* Left Column - User Stats and Report Details */}            
             <div className="space-y-4">
               <div className="flex items-center gap-2 font-medium text-muted-foreground">
                 <Calendar className="h-5 w-5" />
@@ -63,7 +63,7 @@ const ReportsOverview = () => {
                 <Button className="w-md bg-red-600 hover:bg-red-700 text-white h-12 !rounded-xl">Dismiss Report</Button>
               </div>
             </div>
-          </div>
+          </div>   
 
           {/* Detailed Description */}
           <div>
