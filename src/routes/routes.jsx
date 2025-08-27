@@ -7,6 +7,9 @@ import TermsAndCondition from "../components/pages/adminPages/termsandcondition/
 import PostManagement from "../components/pages/adminPages/postManagement/PostManagement";
 import Notification from "../components/pages/adminPages/notification/Notification";
 import ReportsOverview from "../components/pages/adminPages/reports/ReportsOverview";
+import PostOverview from "../components/pages/adminPages/postManagement/PostOverview";
+import TaskerInformation from "../components/pages/adminPages/users/TaskerInformation";
+import PosterInformation from "../components/pages/adminPages/users/PosterInformation";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +19,18 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Dashboard/>
+      },
+      {
+        path: "/users",
+        element: <Users/>
+      },
+      {
+        path: "/Tasker-information",
+        element: <TaskerInformation/>
+      },
+      {
+        path: "/poster-information",
+        element: <PosterInformation/>
       },
       {
         path: "/users",
@@ -36,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/post-management",
         element: <PostManagement/>
+      },
+      {
+        path: "/post-overview",
+        element: <PostOverview/>
       },
       {
         path: "/notification",

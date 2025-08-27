@@ -3,6 +3,7 @@ import React from 'react';
 import { Search, FileText, CheckCircle, Clock, XCircle } from "lucide-react"
 import { Card } from '../../../ui/Card';
 import { CardContent } from '../../../ui/CardContent';
+import PostManagementTable from './PostManagementTable';
 
 function MetricCard({ icon, title, value, change, changeType }) {
   return (
@@ -22,10 +23,7 @@ function MetricCard({ icon, title, value, change, changeType }) {
             <div className='mt-3'>
               <p className="text-sm text-gray-600 font-bold">{title}</p>
               <p className="text-2xl font-bold text-gray-800 mt-1">{value}</p>
-            </div>
-          
-          
-        
+            </div>           
       </CardContent>
     </Card>
   )
@@ -67,7 +65,7 @@ const PostManagement = () => {
     return (
         <div className='admin-page'>
             
-          <div className="space-y-6">
+    <div className="space-y-12">
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         {metrics.map((metric, index) => (
@@ -91,7 +89,11 @@ const PostManagement = () => {
         className="w-2xl pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
       </div>
+       <div className='border border-gray-100'>
+      <PostManagementTable></PostManagementTable>
     </div>
+    </div>
+   
         </div>
     );
 };
