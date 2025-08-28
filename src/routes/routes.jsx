@@ -10,6 +10,12 @@ import ReportsOverview from "../components/pages/adminPages/reports/ReportsOverv
 import PostOverview from "../components/pages/adminPages/postManagement/PostOverview";
 import TaskerInformation from "../components/pages/adminPages/users/TaskerInformation";
 import PosterInformation from "../components/pages/adminPages/users/PosterInformation";
+import ChangeName from "../components/UpdateuserInformation/ChangeName";
+import ChangePhoto from "../components/UpdateuserInformation/ChangePhoto";
+import SignIn from "../components/adminAuthentication/SignIn";
+import ForgetPassword from "../components/adminAuthentication/ForgetPassword";
+import ResetPassword from "../components/adminAuthentication/ResetPassword";
+import RevenueChart from "../components/pages/adminPages/revenuechart/RevenueChart";
 
 const router = createBrowserRouter([
   {
@@ -18,50 +24,74 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Dashboard/>
+        element: <Dashboard />,
       },
       {
         path: "/users",
-        element: <Users/>
+        element: <Users />,
       },
       {
         path: "/Tasker-information",
-        element: <TaskerInformation/>
+        element: <TaskerInformation />,
       },
       {
         path: "/poster-information",
-        element: <PosterInformation/>
+        element: <PosterInformation />,
       },
       {
         path: "/users",
-        element: <Users/>
+        element: <Users />,
       },
       {
         path: "/reports",
-        element: <Reports/>
+        element: <Reports />,
       },
       {
         path: "/reports-overview",
-        element: <ReportsOverview></ReportsOverview>
+        element: <ReportsOverview></ReportsOverview>,
       },
       {
         path: "/terms-and-condition",
-        element: <TermsAndCondition/>
+        element: <TermsAndCondition />,
       },
       {
         path: "/post-management",
-        element: <PostManagement/>
+        element: <PostManagement />,
       },
       {
         path: "/post-overview",
-        element: <PostOverview/>
+        element: <PostOverview />,
       },
       {
         path: "/notification",
-        element: <Notification/>
-      }
-    ]
+        element: <Notification />,
+      },
+      {
+        path: "/post-overview-chart",
+        element: <RevenueChart />,
+      },
+    ],
+  },
+  {
+    path: "/change-name",
+    element: <ChangeName />,
+  },
+  {
+    path: "/change-photo",
+    element: <ChangePhoto />,
+  },
+  {
+    path: "/sign-in",
+    element: <SignIn />,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
   },
 ]);
 
-export default router
+export default router;
