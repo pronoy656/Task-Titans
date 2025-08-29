@@ -43,7 +43,7 @@ const CustomTooltip = ({ active, payload }) => {
     const data = payload[0].payload;
     return (
       <div className="bg-green-500 text-white px-3 py-2 rounded-md shadow-lg text-sm">
-        <div>Last Revenue: ${data.value.toLocaleString()}</div>
+        {/* <div>Last Revenue: ${data.value.toLocaleString()}</div> */}
         <div>{data.revenue}%</div>
       </div>
     );
@@ -81,7 +81,9 @@ const RevenueChart = () => {
       <div className="w-full max-w-8xl mx-auto p-2 pt-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-semibold text-gray-900">Revenue</h1>
+          <h1 className="text-3xl font-semibold text-gray-900">
+            Post Overview
+          </h1>
           <div className="relative">
             <button
               className="flex items-center gap-2 bg-blue-500 text-white px-3 py-1.5 rounded-md text-sm focus:outline-none"
