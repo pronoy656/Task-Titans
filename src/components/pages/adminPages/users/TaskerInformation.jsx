@@ -61,12 +61,36 @@ const TaskerInformation = () => {
                 </p>
                 <p className="font-normal">#001</p>
               </div>
-
               <div>
                 <p className="text-xl font-semibold  text-muted-foreground mb-1">
                   Joining Date
                 </p>
                 <p className="font-normal">02/05/2025</p>
+              </div>
+            </div>
+          </div>
+          <div className="ml-35 mt-6">
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                Badges
+              </h2>
+              <div className="flex flex-wrap gap-4">
+                {/* Founder Titan Badge */}
+                <div className="flex items-center gap-1.5 bg-blue-500 text-white px-4 py-3 rounded-full shadow-sm">
+                  <div className="w-6 h-6 flex items-center justify-center">
+                    <img src="/rewards.png" alt="" />
+                  </div>
+                  <span className="font-bold ">Founder Titan 1</span>
+                </div>
+
+                {/* First Hundred Titans Badge */}
+                <div className="flex items-center gap-3 bg-white text-gray-800 px-4 py-3 rounded-full shadow-md border border-gray-200">
+                  <div className="w-6 h-6 flex items-center justify-center">
+                    {/* Medal/Trophy Icon */}
+                    <img src="/rewards.png" alt="" />
+                  </div>
+                  <span className="font-bold">First Hundred Titans 1</span>
+                </div>
               </div>
             </div>
           </div>

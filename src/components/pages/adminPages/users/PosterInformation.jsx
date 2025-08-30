@@ -60,12 +60,21 @@ const PosterInformation = () => {
                 </p>
                 <p className="font-normal">#001</p>
               </div>
-
               <div>
                 <p className="text-xl font-semibold  text-muted-foreground mb-1">
                   Joining Date
                 </p>
                 <p className="font-normal">02/05/2025</p>
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                  Badges
+                </h2>
+                {/* First Hundred Titans Badge */}
+                <div className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full font-bold">
+                  <img className="w-6 h-6" src="/rewards.png" alt="" />
+                  <span>Founder Poster</span>
+                </div>
               </div>
             </div>
           </div>
