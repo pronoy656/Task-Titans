@@ -8,6 +8,9 @@ import { Eye, EyeOff } from "lucide-react";
 import { Checkbox } from "../ui/Checkbox";
 import { Button } from "../ui/Button";
 import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../redux/features/auth/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/features/auth/authSlice";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,6 +18,8 @@ const SignIn = () => {
   // Use navigate hook for redirect admin home page
   const navigate = useNavigate();
 
+  const [login] = useLoginMutation();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -22,12 +27,21 @@ const SignIn = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Login submitted:", data);
-    // Handle login submission here
-    // ✅ Redirect to admin overview page
-    navigate("/");
+    try {
+      // Call login API
+      const result = await login({
+        email: data.email,
+        password: data.password,
+      }).unwrap();
+
+      dispatch(setUser({ token: result.data }));
+
+      console.log("Login success:", result);
+
+      navigate("/");
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
   };
 
   return (

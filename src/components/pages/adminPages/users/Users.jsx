@@ -1,210 +1,134 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, UserCheck, FileText } from "lucide-react";
 import { Card, CardContent } from "../../../ui/CardContent";
-import { Menu, Pagination, Table } from "antd";
+import { Table } from "antd";
+import { useGetAllUsersQuery } from "../../../../redux/features/auth/authApi";
 
 const Users = () => {
-  // For card data
+  const [activeTab, setActiveTab] = useState(""); // default first tab
+  const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(1);
+  const limit = 8;
+
+  const { data, isLoading } = useGetAllUsersQuery({
+    ...(activeTab !== "ALL" ? { role: activeTab } : {}), // send role only if not ALL
+    page,
+    limit,
+    ...(searchTerm ? { searchTerm } : {}),
+  });
+
+  console.log(data);
+
+  const stats = data?.data?.stats || {};
+
   const metrics = [
     {
       title: "Total Users",
-      value: "124,563",
-      growth: "+12.5%",
+      value: stats.totalUsers || 0,
+      growth: `${stats.monthlyGrowth || 0}%`,
       icon: UserCheck,
     },
     {
       title: "Total Tasker",
-      value: "124,563",
-      growth: "+12.5%",
+      value: stats.totalTaskers || 0,
+      growth: `${stats.monthlyGrowth || 0}%`,
       icon: UserCheck,
     },
     {
       title: "Total Poster",
-      value: "124,563",
-      growth: "+12.5%",
+      value: stats.totalPosters || 0,
+      growth: `${stats.monthlyGrowth || 0}%`,
       icon: FileText,
     },
   ];
 
-  // Table data for Poster
-  const posterUserdata = [
-    {
-      key: "1",
-      name: "Alice Johnson",
-      email: "alice.johnson@example.com",
-      UserID: "25647",
-    },
-    {
-      key: "2",
-      name: "Michael Smith",
-      email: "michael.smith@example.com",
-      UserID: "89213",
-    },
-    {
-      key: "3",
-      name: "Sophia Williams",
-      email: "sophia.williams@example.com",
-      UserID: "67325",
-    },
-    {
-      key: "4",
-      name: "James Brown",
-      email: "james.brown@example.com",
-      UserID: "74129",
-    },
-    {
-      key: "5",
-      name: "Emily Davis",
-      email: "emily.davis@example.com",
-      UserID: "58316",
-    },
-    {
-      key: "6",
-      name: "Daniel Miller",
-      email: "daniel.miller@example.com",
-      UserID: "93472",
-    },
-    {
-      key: "7",
-      name: "Olivia Wilson",
-      email: "olivia.wilson@example.com",
-      UserID: "41589",
-    },
-    {
-      key: "8",
-      name: "Ethan Martinez",
-      email: "ethan.martinez@example.com",
-      UserID: "72854",
-    },
-    {
-      key: "9",
-      name: "Ethan Martinez",
-      email: "ethan.martinez@example.com",
-      UserID: "72854",
-    },
-    {
-      key: "10",
-      name: "Ethan Martinez",
-      email: "ethan.martinez@example.com",
-      UserID: "72854",
-    },
-    {
-      key: "11",
-      name: "Ethan Martinez",
-      email: "ethan.martinez@example.com",
-      UserID: "72854",
-    },
-  ];
+  const userdata =
+    data?.data?.users?.map((user) => ({
+      key: user._id,
+      name: user.name,
+      email: user.email,
+      UserID: user._id,
+      role: user.role,
+    })) || [];
 
-  // column label
   const [actionDropdown, setActionDropdown] = useState(null);
 
-  const handleActionClick = (key) => {
+  const handleActionClick = (key) =>
     setActionDropdown(actionDropdown === key ? null : key);
-  };
 
-  //   const handleCloseDropdown = () => {
-  //     setActionDropdown(null);
-  //   };
-
-  // Optionally, add handlers for view profile and block
   const handleViewProfile = (record) => {
-    // Implement view profile logic here
-
     alert(`View profile for ${record.name}`);
     setActionDropdown(null);
-    console.log(record.UserID);
   };
+
   const handleBlock = (record) => {
-    // Implement block logic here
     alert(`Block user ${record.name}`);
     setActionDropdown(null);
-    console.log(record.UserID);
   };
+
   const columns = [
     {
-      title: (
-        <span style={{ fontSize: "18px", fontWeight: 500 }}>User Name</span>
-      ),
+      title: "User Name",
       dataIndex: "name",
       key: "name",
-      //text size bold for table data
       render: (text) => <span style={{ fontSize: "16px" }}>{text}</span>,
     },
     {
-      title: <span style={{ fontSize: "18px", fontWeight: 500 }}>Email</span>,
+      title: "Email",
       dataIndex: "email",
       key: "email",
       render: (text) => <span style={{ fontSize: "16px" }}>{text}</span>,
     },
     {
-      title: <span style={{ fontSize: "18px", fontWeight: 500 }}>User ID</span>,
+      title: "User ID",
       dataIndex: "UserID",
       key: "UserID",
       render: (text) => <span style={{ fontSize: "16px" }}>{text}</span>,
     },
     {
-      title: (
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
+      render: (role) => (
         <span
-          style={{
-            fontSize: "18px",
-            fontWeight: 500,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          className={`px-2 py-1 rounded text-white ${
+            role === "POSTER"
+              ? "bg-blue-500"
+              : role === "TASKER"
+              ? "bg-green-500"
+              : "bg-gray-500"
+          }`}
+          style={{ fontSize: "16px" }}
         >
-          Action
+          {role}
         </span>
       ),
+    },
+    {
+      title: "Action",
       dataIndex: "action",
       key: "action",
       align: "center",
-      render: (text, record) => (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: 48,
-            minWidth: 40,
-            position: "relative",
-          }}
-        >
+      render: (_, record) => (
+        <div style={{ position: "relative" }}>
           <button
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
             onClick={(e) => {
               e.stopPropagation();
               handleActionClick(record.key);
             }}
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="10" cy="4" r="1.5" fill="#333" />
-              <circle cx="10" cy="10" r="1.5" fill="#333" />
-              <circle cx="10" cy="16" r="1.5" fill="#333" />
-            </svg>
+            •••
           </button>
           {actionDropdown === record.key && (
-            <div className="absolute right-0 top-full mt-2 w-32 bg-white border border-gray-200 rounded shadow-lg z-20">
+            <div className="absolute right-0 top-full mt-2 w-32 bg-white border rounded shadow-lg z-20">
               <div
-                className="px-4 py-2 cursor-pointer hover:bg-blue-100 text-sm text-gray-700"
+                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
                 onClick={() => handleViewProfile(record)}
               >
                 View Profile
               </div>
               <div
-                className="px-4 py-2 cursor-pointer hover:bg-red-600 text-sm bg-red-500 text-white"
+                className="px-4 py-2 cursor-pointer hover:bg-red-600 bg-red-500 text-white"
                 onClick={() => handleBlock(record)}
               >
                 Block
@@ -216,156 +140,154 @@ const Users = () => {
     },
   ];
 
-  // Table data for Tasker
-  const taskerUserdata = [
-    {
-      key: "101",
-      name: "Rahul Roy",
-      email: "rahul.roy@example.com",
-      UserID: "T1001",
-    },
-    {
-      key: "102",
-      name: "Priya Singh",
-      email: "priya.singh@example.com",
-      UserID: "T1002",
-    },
-    {
-      key: "103",
-      name: "Amit Kumar",
-      email: "amit.kumar@example.com",
-      UserID: "T1003",
-    },
-    {
-      key: "104",
-      name: "Sneha Das",
-      email: "sneha.das@example.com",
-      UserID: "T1004",
-    },
-    {
-      key: "105",
-      name: "Vikram Patel",
-      email: "vikram.patel@example.com",
-      UserID: "T1005",
-    },
-    {
-      key: "106",
-      name: "Anjali Mehra",
-      email: "anjali.mehra@example.com",
-      UserID: "T1006",
-    },
-  ];
-
-  // Tab state for see different table with conditionally
-  const [activeTab, setActiveTab] = useState("Poster");
-  const userdata = activeTab === "Poster" ? posterUserdata : taskerUserdata;
-
-  // Close dropdown when clicking outside
-  React.useEffect(() => {
-    const handleClickOutside = () => {
-      setActionDropdown(null);
-    };
-    if (actionDropdown !== null) {
+  // Close dropdown
+  useEffect(() => {
+    const handleClickOutside = () => setActionDropdown(null);
+    if (actionDropdown !== null)
       document.addEventListener("click", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
+    return () => document.removeEventListener("click", handleClickOutside);
   }, [actionDropdown]);
 
-  return (
-    <div className="admin-page">
-      <div className=" p-2">
-        <div className=" space-y-6">
-          {/* Metrics Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {metrics.map((metric, index) => (
-              <Card key={index} className="bg-white shadow-sm border-0">
-                <CardContent className="p-4">
-                  <div className="">
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                          <metric.icon className="w-6 h-6 text-blue-600" />
-                        </div>
-                        <span className="text-green-600 font-medium justify-end">
-                          {metric.growth}
-                        </span>
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-600 mb-1">
-                          {metric.title}
-                        </p>
-                        <p className="text-2xl font-bold text-gray-900">
-                          {metric.value}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Search Bar */}
-
-          <div className="relative mb-6">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <input
-              type="text"
-              placeholder="Search here......"
-              className="w-2xl pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+  if (isLoading)
+    return (
+      <div className="admin-page p-2">
+        {/* Metrics Skeleton */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {[1, 2, 3].map((_, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-sm border-0 rounded p-4 animate-pulse"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 bg-gray-200 rounded-full" />
+                <div className="w-12 h-4 bg-gray-200 rounded" />
+              </div>
+              <div className="space-y-2">
+                <div className="w-3/4 h-4 bg-gray-200 rounded" />
+                <div className="w-1/2 h-6 bg-gray-200 rounded" />
+              </div>
+            </div>
+          ))}
         </div>
-        {/* Tabs for Poster/Tas ker */}
+
+        {/* Search Skeleton */}
+        <div className="relative mb-6">
+          <div className="w-2xl h-12 bg-gray-200 rounded-lg animate-pulse mx-auto" />
+        </div>
+
+        {/* Tabs Skeleton */}
         <div className="flex space-x-4 mb-4">
-          <button
-            className={`px-6 py-2 rounded-t-lg font-semibold border-b-2 transition-colors duration-200 ${
-              activeTab === "Poster"
-                ? "border-blue-500 text-blue-600 bg-blue-50"
-                : "border-transparent text-gray-500 bg-white"
-            }`}
-            onClick={() => setActiveTab("Poster")}
-          >
-            Poster
-          </button>
-          <button
-            className={`px-6 py-2 rounded-t-lg font-semibold border-b-2 transition-colors duration-200 ${
-              activeTab === "Tasker"
-                ? "border-blue-500 text-blue-600 bg-blue-50"
-                : "border-transparent text-gray-500 bg-white"
-            }`}
-            onClick={() => setActiveTab("Tasker")}
-          >
-            Tasker
-          </button>
-        </div>
-        <div>
-          <div className="scrollbar-hide">
-            <Table
-              className="border border-[#F0F0F0] overflow-y-auto custom-table-row"
-              dataSource={userdata}
-              columns={columns}
-              pagination={{ pageSize: 8, position: ["bottomRight"] }}
-              scroll={{ x: "max-content" }}
-              rowClassName={() => "custom-table-row"}
+          {[1, 2, 3].map((_, index) => (
+            <div
+              key={index}
+              className="w-20 h-10 bg-gray-200 rounded-t-lg animate-pulse"
             />
-          </div>
+          ))}
+        </div>
+
+        {/* Table Skeleton */}
+        <div className="space-y-2">
+          {Array.from({ length: limit }).map((_, index) => (
+            <div
+              key={index}
+              className="flex space-x-4 border-b border-gray-200 p-3 animate-pulse"
+            >
+              <div className="w-1/4 h-6 bg-gray-200 rounded" />
+              <div className="w-1/4 h-6 bg-gray-200 rounded" />
+              <div className="w-1/4 h-6 bg-gray-200 rounded" />
+              <div className="w-1/4 h-6 bg-gray-200 rounded" />
+            </div>
+          ))}
         </div>
       </div>
+    );
+
+  // if (error) return <p>Error loading users</p>;
+
+  return (
+    <div className="admin-page p-2">
+      {/* Metrics */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        {metrics.map((metric, index) => (
+          <Card key={index} className="bg-white shadow-sm border-0">
+            <CardContent className="p-4">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <metric.icon className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <span className="text-green-600 font-medium">
+                    {metric.growth}
+                  </span>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 mb-1">{metric.title}</p>
+                  <p className="text-2xl font-bold text-gray-900">
+                    {metric.value}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Search */}
+      <div className="relative mb-6">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+        <input
+          type="text"
+          placeholder="Search here..."
+          className="w-2xl pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      {/* Tabs */}
+      <div className="flex space-x-4 mb-4">
+        {["POSTER", "TASKER", "ALL"].map((tab) => (
+          <button
+            key={tab}
+            className={`px-6 py-2 rounded-t-lg font-semibold border-b-2 transition-colors duration-200 ${
+              activeTab === tab
+                ? "border-blue-500 text-blue-600 bg-blue-50"
+                : "border-transparent text-gray-500 bg-white"
+            }`}
+            onClick={() => {
+              setActiveTab(tab);
+              setPage(1);
+            }}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {/* Table */}
+      <Table
+        className="border border-[#F0F0F0] overflow-y-auto"
+        dataSource={userdata}
+        columns={columns}
+        pagination={{
+          pageSize: limit,
+          current: page,
+          total: data?.pagination?.total,
+          onChange: (newPage) => setPage(newPage),
+          position: ["bottomRight"],
+        }}
+        scroll={{ x: "max-content" }}
+        rowClassName={() => "custom-table-row"}
+      />
+
+      <style>{`
+        .custom-table-row td {
+          padding-top: 12px !important;
+          padding-bottom: 12px !important;
+        }
+      `}</style>
     </div>
   );
 };
-
-// Add custom CSS for minimal row gap
-const style = document.createElement("style");
-style.innerHTML = `
-  .custom-table-row td {
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-  }
-`;
-document.head.appendChild(style);
 
 export default Users;
