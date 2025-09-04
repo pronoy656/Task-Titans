@@ -31,11 +31,11 @@ const router = createBrowserRouter([
         element: <Users />,
       },
       {
-        path: "/Tasker-information",
+        path: "/Tasker-information/:id",
         element: <TaskerInformation />,
       },
       {
-        path: "/poster-information",
+        path: "/poster-information/:id",
         element: <PosterInformation />,
       },
       {
