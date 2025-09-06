@@ -6,6 +6,7 @@ import PosterInformationTable from "./PosterInformationTable";
 import { Button } from "../../../ui/Button";
 import { Check, X } from "lucide-react";
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const PosterInformation = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const PosterInformation = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcwMjA1NTAsImV4cCI6MTc1NzEwNjk1MH0.hrQvJzYTZBbKUYEjyjRrfjMnIqtGpHzx3C5h5YnChCw`,
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcxNzc4NTYsImV4cCI6MTc1NzI2NDI1Nn0.w88ZoqSPkQ08BCrRQlwauBcvi7t6HznEEm-SpbrTCwc`,
             },
           }
         );
@@ -45,12 +46,58 @@ const PosterInformation = () => {
     fetchUser();
   }, [id]);
 
-  const handleUnblockUser = () => {
-    console.log("User Unblocked");
+  const handleBlockUser = async () => {
+    try {
+      const response = await fetch(
+        `http://10.10.7.33:5000/api/v1/user/${userData._id}/block`,
+        {
+          method: "PATCH", // or POST, based on your backend
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcxNzc4NTYsImV4cCI6MTc1NzI2NDI1Nn0.w88ZoqSPkQ08BCrRQlwauBcvi7t6HznEEm-SpbrTCwc`, // replace with your real token
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        setUserData((prev) => ({ ...prev, status: data.data.status }));
+        toast.success("User blocked successfully!");
+      } else {
+        toast.error(data.message || "Failed to block user");
+      }
+    } catch (err) {
+      console.error("Error blocking user:", err);
+      toast.error("Something went wrong while blocking user!");
+    }
   };
 
-  const handleBlockUser = () => {
-    console.log("Blocked User");
+  const handleUnblockUser = async () => {
+    try {
+      const response = await fetch(
+        `http://10.10.7.33:5000/api/v1/user/${userData._id}/unblock`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcxNzc4NTYsImV4cCI6MTc1NzI2NDI1Nn0.w88ZoqSPkQ08BCrRQlwauBcvi7t6HznEEm-SpbrTCwc`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        setUserData((prev) => ({ ...prev, status: data.data.status }));
+        toast.success("User unblocked successfully!");
+      } else {
+        toast.error(data.message || "Failed to unblock user");
+      }
+    } catch (err) {
+      console.error("Error unblocking user:", err);
+      toast.error("Something went wrong while unblocking user!");
+    }
   };
 
   if (loading) return <div>Loading...</div>;
@@ -69,7 +116,20 @@ const PosterInformation = () => {
               <h2 className="text-2xl font-bold">{userData.name}</h2>
               <p>Email: {userData.email}</p>
               <p>User ID: {userData._id}</p>
-              <p>Status: {userData.status}</p>
+              <p>
+                Status:{" "}
+                <span
+                  className={`px-3 py-1 rounded-lg text-white text-sm ${
+                    userData.status === "ACTIVE"
+                      ? "bg-green-500"
+                      : userData.status === "RESTRICTED"
+                      ? "bg-red-500"
+                      : "bg-gray-500"
+                  }`}
+                >
+                  {userData.status}
+                </span>
+              </p>
               <p>Verified: {userData.verified ? "Yes" : "No"}</p>
               <p>Role: {userData.role}</p>
             </div>
@@ -89,14 +149,25 @@ const PosterInformation = () => {
         <div className="flex gap-4">
           <Button
             onClick={handleUnblockUser}
-            className="bg-green-500 hover:bg-green-600 text-white !px-24 py-7 !text-lg rounded-lg flex items-center gap-2 font-medium min-w-[160px]"
+            disabled={userData?.status === "ACTIVE"} // disable if already active
+            className={`${
+              userData?.status === "ACTIVE"
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-green-500 hover:bg-green-600 text-white"
+            } !px-24 py-7 !text-lg rounded-lg flex items-center gap-2 font-medium min-w-[160px]`}
           >
             <Check className="w-6 h-6" />
             Unblock User
           </Button>
+
           <Button
             onClick={handleBlockUser}
-            className="bg-red-500 hover:bg-red-600 text-white !px-24 py-7 !text-lg rounded-lg flex items-center gap-2 font-semibold min-w-[160px]"
+            disabled={userData?.status === "RESTRICTED"} // disable if already blocked
+            className={`${
+              userData?.status === "RESTRICTED"
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-red-500 hover:bg-red-600 text-white"
+            } !px-24 py-7 !text-lg rounded-lg flex items-center gap-2 font-semibold min-w-[160px]`}
           >
             <X className="w-6 h-6" />
             Block User

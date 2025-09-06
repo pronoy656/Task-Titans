@@ -156,7 +156,7 @@ const TaskerInformation = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcwMjA1NTAsImV4cCI6MTc1NzEwNjk1MH0.hrQvJzYTZBbKUYEjyjRrfjMnIqtGpHzx3C5h5YnChCw`, // replace yourToken with your actual token
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcxNzc4NTYsImV4cCI6MTc1NzI2NDI1Nn0.w88ZoqSPkQ08BCrRQlwauBcvi7t6HznEEm-SpbrTCwc`, // replace yourToken with your actual token
             },
           }
         );
