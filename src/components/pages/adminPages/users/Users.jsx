@@ -17,7 +17,7 @@ const Users = () => {
   const limit = 10;
 
   // ✅ Fetch users
-  const { data, isLoading } = useGetUsersQuery({
+  const { data, isLoading, refetch } = useGetUsersQuery({
     page,
     limit,
     role: activeTab !== "ALL" ? activeTab : undefined, // ALL হলে role পাঠাবে না
@@ -84,9 +84,50 @@ const Users = () => {
     setActionDropdown(null);
   };
 
-  const handleBlock = (record) => {
-    alert(`Block user ${record.name}`);
-    setActionDropdown(null);
+  // ✅ Block User
+  const handleBlock = async (record) => {
+    try {
+      const res = await fetch(
+        `http://10.10.7.33:5000/api/v1/user/${record.userID}/block`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcxNzc4NTYsImV4cCI6MTc1NzI2NDI1Nn0.w88ZoqSPkQ08BCrRQlwauBcvi7t6HznEEm-SpbrTCwc`,
+          },
+        }
+      );
+      const result = await res.json();
+      if (result.success) {
+        await refetch(); // 🔥 Refresh Users table
+      }
+      setActionDropdown(null);
+    } catch (err) {
+      console.error("Error blocking user:", err);
+    }
+  };
+
+  // ✅ Unblock User
+  const handleUnblock = async (record) => {
+    try {
+      const res = await fetch(
+        `http://10.10.7.33:5000/api/v1/user/${record.userID}/unblock`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcxNzc4NTYsImV4cCI6MTc1NzI2NDI1Nn0.w88ZoqSPkQ08BCrRQlwauBcvi7t6HznEEm-SpbrTCwc`,
+          },
+        }
+      );
+      const result = await res.json();
+      if (result.success) {
+        await refetch(); // 🔥 Refresh Users table
+      }
+      setActionDropdown(null);
+    } catch (err) {
+      console.error("Error unblocking user:", err);
+    }
   };
 
   // ✅ Table columns
@@ -176,34 +217,64 @@ const Users = () => {
       title: "Action",
       key: "action",
       align: "center",
-      render: (_, record) => (
-        <div style={{ position: "relative" }}>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleActionClick(record.key);
-            }}
-          >
-            •••
-          </button>
-          {actionDropdown === record.key && (
-            <div className="absolute right-0 top-full mt-2 w-32 bg-white border rounded shadow-lg z-20">
-              <div
-                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
-                onClick={() => handleViewProfile(record)}
+      render: (_, record) => {
+        if (record.status === "RESTRICTED") {
+          // 🔴 Blocked case
+          return (
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleActionClick(record.key);
+                }}
+                className="px-3 py-1 bg-red-500 text-white rounded"
               >
-                View Profile
-              </div>
-              <div
-                className="px-4 py-2 cursor-pointer hover:bg-red-600 bg-red-500 text-white"
-                onClick={() => handleBlock(record)}
-              >
-                Block
-              </div>
+                Blocked
+              </button>
+              {actionDropdown === record.key && (
+                <div className="absolute right-0 top-full mt-2 w-32 bg-white border rounded shadow-lg z-20">
+                  <div
+                    className="px-4 py-2 cursor-pointer hover:bg-green-500 hover:text-white"
+                    onClick={() => handleUnblock(record)}
+                  >
+                    Unblock
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      ),
+          );
+        } else {
+          // 🟢 Active case
+          return (
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleActionClick(record.key);
+                }}
+              >
+                •••
+              </button>
+              {actionDropdown === record.key && (
+                <div className="absolute right-0 top-full mt-2 w-32 bg-white border rounded shadow-lg z-20">
+                  <div
+                    className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+                    onClick={() => handleViewProfile(record)}
+                  >
+                    View Profile
+                  </div>
+                  <div
+                    className="px-4 py-2 cursor-pointer hover:bg-red-600 bg-red-500 text-white"
+                    onClick={() => handleBlock(record)}
+                  >
+                    Block
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        }
+      },
     },
   ];
 

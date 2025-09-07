@@ -1,35 +1,8 @@
-// import { baseApi } from "../../api/baseApi";
-
-// const usersApi = baseApi.injectEndpoints({
-//   overrideExisting: true,
-//   endpoints: (builder) => ({
-//     // Get users with pagination
-//     getUsers: builder.query({
-//       query: ({ page = 1, limit = 10 } = {}) => ({
-//         url: "/user",
-//         method: "GET",
-//         credentials: "include",
-//         params: { page, limit },
-//       }),
-//     }),
-
-//     // Get users stats
-//     getUsersStats: builder.query({
-//       query: () => ({
-//         url: "/user/stats",
-//         method: "GET",
-//         credentials: "include",
-//       }),
-//     }),
-//   }),
-// });
-
-// export const { useGetUsersQuery, useGetUsersStatsQuery } = usersApi;
-
 import { baseApi } from "../../api/baseApi";
 
 const usersApi = baseApi.injectEndpoints({
   overrideExisting: true,
+
   endpoints: (builder) => ({
     // Get users with pagination + role + search
     getUsers: builder.query({
@@ -40,10 +13,11 @@ const usersApi = baseApi.injectEndpoints({
         params: {
           page,
           limit,
-          ...(role ? { role } : {}), // শুধু role থাকলে পাঠাবে
-          ...(searchTerm ? { searchTerm } : {}), // শুধু search থাকলে পাঠাবে
+          ...(role ? { role } : {}),
+          ...(searchTerm ? { searchTerm } : {}),
         },
       }),
+      providesTags: ["Users"], // 👈 এখানে ট্যাগ
     }),
 
     // Get users stats
@@ -53,8 +27,20 @@ const usersApi = baseApi.injectEndpoints({
         method: "GET",
         credentials: "include",
       }),
+      providesTags: ["UsersStats"],
+    }),
+
+    // Block user
+    blockUser: builder.mutation({
+      query: (userId) => ({
+        url: `/user/${userId}/block`,
+        method: "PATCH",
+        credentials: "include",
+      }),
+      invalidatesTags: ["Users"], // 👈 block করলে Users cache invalidate হবে
     }),
   }),
 });
 
-export const { useGetUsersQuery, useGetUsersStatsQuery } = usersApi;
+export const { useGetUsersQuery, useGetUsersStatsQuery, useBlockUserMutation } =
+  usersApi;
