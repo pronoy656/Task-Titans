@@ -12,7 +12,16 @@ const termsApi = baseApi.injectEndpoints({
         credentials: "include",
       }),
     }),
+
+    // Get Terms & Conditions
+    getTerms: builder.query({
+      query: () => ({
+        url: "rules/terms-and-conditions",
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useSaveTermsMutation } = termsApi;
+export const { useSaveTermsMutation, useGetTermsQuery } = termsApi;
