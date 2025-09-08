@@ -1,5 +1,4 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdOutlineGridView } from "react-icons/md";
 import {
   ClipboardCheck,
@@ -11,6 +10,8 @@ import {
   UserCog,
   Users,
 } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../redux/features/auth/authSlice";
 
 const menuItems = [
   {
@@ -60,20 +61,29 @@ const menuItems = [
       <Eye strokeColor={isActive ? "#EDF8F9" : "#212936"} />
     ),
   },
-  {
-    label: "Logout",
-    path: "/packing-list",
-    renderIcon: (isActive) => (
-      <LogOut strokeColor={isActive ? "#EDF8F9" : "#212936"} />
-    ),
-  },
 ];
 
 const AdminSidebar = ({ closeSidebar }) => {
   const location = useLocation();
   const pathname = location.pathname;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    // ✅ localStorage থেকে token মুছে দাও
+    localStorage.removeItem("accessToken");
+
+    // ✅ Redux state থেকেও clear করো (যদি ব্যবহার করো)
+    dispatch(setUser(null));
+
+    // ✅ Redirect to login page
+    navigate("/sign-in");
+
+    console.log("Login successfull");
+  };
+
   return (
-    <div className="h-full">
+    <div className="h-full relative flex flex-col">
       {/* <img className="w-40 h-12" src="/logo.png" alt="" /> */}
       {/* Menu Items */}
       <div className="px-3 pt-6">
@@ -101,10 +111,19 @@ const AdminSidebar = ({ closeSidebar }) => {
             </div>
           );
         })}
+        {/* Logout Button at the bottom */}
+        <div className="absolute bottom-0 pb-6">
+          <button
+            onClick={handleLogOut}
+            className="w-full px-3 py-4 bg-red-500 text-white text-xl font-semibold rounded-lg flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <LogOut />
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default AdminSidebar;
-<p>This is addmin side bar</p>;

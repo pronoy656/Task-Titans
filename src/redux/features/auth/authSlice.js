@@ -9,8 +9,13 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.token = action.payload.token;
+      if (action.payload && action.payload.token) {
+        state.token = action.payload.token;
+      } else {
+        state.token = null; // ✅ handle null safely
+      }
     },
+
     logOut: (state) => {
       state.token = null;
     },
