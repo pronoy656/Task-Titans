@@ -7,6 +7,7 @@ const baseQuery = fetchBaseQuery({
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState()?.auth?.token;
+    console.log({ token });
     if (token) headers.set("Authorization", `Bearer ${token}`);
     return headers;
   },
@@ -19,7 +20,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   if (result?.error?.status === 401 && !isLoggedOut) {
     // Don't attempt refresh if already trying to logout
-    if (typeof args === "object" && "url" in args && args.url === "/auth/logout") {
+    if (
+      typeof args === "object" &&
+      "url" in args &&
+      args.url === "/auth/logout"
+    ) {
       return result;
     }
 
@@ -35,7 +40,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       extraOptions
     );
 
-    if (refreshResult.data && typeof refreshResult.data === "object" && "data" in refreshResult.data) {
+    if (
+      refreshResult.data &&
+      typeof refreshResult.data === "object" &&
+      "data" in refreshResult.data
+    ) {
       const { accessToken, user } = refreshResult.data.data;
 
       api.dispatch(setUser({ user, token: accessToken }));

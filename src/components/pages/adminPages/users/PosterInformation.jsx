@@ -23,7 +23,7 @@ const PosterInformation = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcyNjQ1OTQsImV4cCI6MTc1NzM1MDk5NH0.k7Q_aP0lykR96eqeH2KMsWFk_FfiXW-oxqwXYPao3Tw`,
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcyODExNzAsImV4cCI6MTc1NzM2NzU3MH0.Xtc12i968vhop88bN796TPY6aKEPNHezaTk9RQJp3OU`,
             },
           }
         );
@@ -54,7 +54,7 @@ const PosterInformation = () => {
           method: "PATCH", // or POST, based on your backend
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcyNjQ1OTQsImV4cCI6MTc1NzM1MDk5NH0.k7Q_aP0lykR96eqeH2KMsWFk_FfiXW-oxqwXYPao3Tw`, // replace with your real token
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcyODExNzAsImV4cCI6MTc1NzM2NzU3MH0.Xtc12i968vhop88bN796TPY6aKEPNHezaTk9RQJp3OU`, // replace with your real token
           },
         }
       );
@@ -81,7 +81,7 @@ const PosterInformation = () => {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcyNjQ1OTQsImV4cCI6MTc1NzM1MDk5NH0.k7Q_aP0lykR96eqeH2KMsWFk_FfiXW-oxqwXYPao3Tw`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcyODExNzAsImV4cCI6MTc1NzM2NzU3MH0.Xtc12i968vhop88bN796TPY6aKEPNHezaTk9RQJp3OU`,
           },
         }
       );
