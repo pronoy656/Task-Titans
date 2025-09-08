@@ -93,7 +93,7 @@ const Users = () => {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcyODExNzAsImV4cCI6MTc1NzM2NzU3MH0.Xtc12i968vhop88bN796TPY6aKEPNHezaTk9RQJp3OU`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTczNTUwODksImV4cCI6MTc1NzQ0MTQ4OX0.u-7QbDqcyXvGwcTV6eMtt4pPpDIOJt7zvU2IDFplWso`,
           },
         }
       );
@@ -116,7 +116,7 @@ const Users = () => {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTcyODExNzAsImV4cCI6MTc1NzM2NzU3MH0.Xtc12i968vhop88bN796TPY6aKEPNHezaTk9RQJp3OU`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTczNTUwODksImV4cCI6MTc1NzQ0MTQ4OX0.u-7QbDqcyXvGwcTV6eMtt4pPpDIOJt7zvU2IDFplWso`,
           },
         }
       );
