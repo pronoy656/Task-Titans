@@ -105,7 +105,7 @@ const PosterInformation = () => {
 
   return (
     <div className="admin-page">
-      <Card className="w-full max-w-7xl mx-auto my-6 p-6">
+      {/* <Card className="w-full max-w-7xl mx-auto my-6 p-6">
         <CardContent>
           <div className="flex gap-6 items-center">
             <Avatar className="w-20 h-20">
@@ -135,17 +135,65 @@ const PosterInformation = () => {
             </div>
           </div>
         </CardContent>
+      </Card> */}
+      <Card className="w-full max-w-5xl mx-auto my-8 p-8 shadow-lg rounded-2xl border border-gray-200">
+        <CardContent>
+          <div className="flex gap-8 items-center">
+            {/* Avatar */}
+            <Avatar className="w-28 h-28 border-4 border-gray-100 shadow-md">
+              <AvatarImage src={userData.image} alt={userData.name} />
+              <AvatarFallback className="text-3xl font-semibold">
+                {userData.name[0]}
+              </AvatarFallback>
+            </Avatar>
+
+            {/* User Info */}
+            <div className="space-y-3">
+              <h2 className="text-3xl font-extrabold text-gray-800">
+                {userData.name}
+              </h2>
+              <p className="text-lg font-medium text-gray-600">
+                <span className="font-bold text-gray-700">Email:</span>{" "}
+                {userData.email}
+              </p>
+              <p className="text-lg font-medium text-gray-600">
+                <span className="font-semibold text-gray-700">User ID:</span>{" "}
+                {userData._id}
+              </p>
+
+              <p className="text-lg font-medium text-gray-600">
+                <span className="font-semibold text-gray-700">Verified:</span>{" "}
+                {userData.verified ? "✅ Yes" : "❌ No"}
+              </p>
+              <p className="text-lg font-medium text-gray-600">
+                <span className="font-semibold text-gray-700">Role:</span>{" "}
+                {userData.role}
+              </p>
+              <p className="text-lg ">
+                <span className="font-semibold text-gray-700">Status:</span>{" "}
+                <span
+                  className={`px-4 py-1.5 rounded-full text-white text-base font-medium shadow-sm ${
+                    userData.status === "ACTIVE"
+                      ? "bg-green-500"
+                      : userData.status === "RESTRICTED"
+                      ? "bg-red-500"
+                      : "bg-gray-500"
+                  }`}
+                >
+                  {userData.status}
+                </span>
+              </p>
+            </div>
+          </div>
+        </CardContent>
       </Card>
 
       <div className="w-full max-w-7xl mx-auto mt-6">
-        <h3 className="text-xl font-semibold mb-3">Poster Tasks</h3>
+        <h3 className="text-3xl font-bold mb-4">Poster Tasks</h3>
         <PosterInformationTable data={tasks} />
       </div>
 
-      <div className="w-full max-w-4xl mx-auto p-6">
-        <h2 className="text-3xl font-semibold mb-8 text-gray-800">
-          Admin Actions
-        </h2>
+      <div className="max-w-4xl mx-auto flex items-center justify-center p-6 mt-5">
         <div className="flex gap-4">
           <Button
             onClick={handleUnblockUser}
@@ -154,7 +202,7 @@ const PosterInformation = () => {
               userData?.status === "ACTIVE"
                 ? "bg-gray-300 cursor-not-allowed"
                 : "bg-green-500 hover:bg-green-600 text-white"
-            } !px-24 py-7 !text-lg rounded-lg flex items-center gap-2 font-medium min-w-[160px]`}
+            } !px-24 py-7 !text-lg rounded-lg flex items-center gap-2 font-medium`}
           >
             <Check className="w-6 h-6" />
             Unblock User
@@ -167,7 +215,7 @@ const PosterInformation = () => {
               userData?.status === "RESTRICTED"
                 ? "bg-gray-300 cursor-not-allowed"
                 : "bg-red-500 hover:bg-red-600 text-white"
-            } !px-24 py-7 !text-lg rounded-lg flex items-center gap-2 font-semibold min-w-[160px]`}
+            } !px-24 py-7 !text-lg rounded-lg flex items-center gap-2 font-semibold`}
           >
             <X className="w-6 h-6" />
             Block User
