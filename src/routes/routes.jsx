@@ -16,6 +16,8 @@ import SignIn from "../components/adminAuthentication/SignIn";
 import ForgetPassword from "../components/adminAuthentication/ForgetPassword";
 import ResetPassword from "../components/adminAuthentication/ResetPassword";
 import RevenueChart from "../components/pages/adminPages/revenuechart/RevenueChart";
+import FaqPage from "../components/pages/adminPages/faq/FaqPage";
+import Category from "../components/pages/adminPages/Category/Category";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
         element: <Reports />,
       },
       {
+        path: "/create-category",
+        element: <Category />,
+      },
+      {
         path: "/reports-overview",
         element: <ReportsOverview></ReportsOverview>,
       },
@@ -69,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/post-overview-chart",
         element: <RevenueChart />,
+      },
+      {
+        path: "/faq",
+        element: <FaqPage />,
       },
     ],
   },

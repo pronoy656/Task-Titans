@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdOutlineGridView } from "react-icons/md";
 import {
+  CircleQuestionMark,
   ClipboardCheck,
   Eye,
   Handshake,
@@ -41,6 +42,13 @@ const menuItems = [
     ),
   },
   {
+    label: "Create Category",
+    path: "/create-category",
+    renderIcon: (isActive) => (
+      <Handshake strokeColor={isActive ? "#EDF8F9" : "#212936"} />
+    ),
+  },
+  {
     label: "Terms & Conditions",
     path: "/terms-and-condition",
     renderIcon: (isActive) => (
@@ -59,6 +67,13 @@ const menuItems = [
     path: "/post-overview-chart",
     renderIcon: (isActive) => (
       <Eye strokeColor={isActive ? "#EDF8F9" : "#212936"} />
+    ),
+  },
+  {
+    label: "FAQ",
+    path: "/faq",
+    renderIcon: (isActive) => (
+      <CircleQuestionMark strokeColor={isActive ? "#EDF8F9" : "#212936"} />
     ),
   },
 ];
