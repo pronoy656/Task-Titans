@@ -18,67 +18,74 @@ import ResetPassword from "../components/adminAuthentication/ResetPassword";
 import RevenueChart from "../components/pages/adminPages/revenuechart/RevenueChart";
 import FaqPage from "../components/pages/adminPages/faq/FaqPage";
 import Category from "../components/pages/adminPages/Category/Category";
+import ProtectedRoute from "../components/protectedRoute/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AdminLayout></AdminLayout>,
+    element: <ProtectedRoute />,
     children: [
       {
-        path: "",
-        element: <Dashboard />,
-      },
-      {
-        path: "/users",
-        element: <Users />,
-      },
-      {
-        path: "/Tasker-information/:id",
-        element: <TaskerInformation />,
-      },
-      {
-        path: "/poster-information/:id",
-        element: <PosterInformation />,
-      },
-      {
-        path: "/users",
-        element: <Users />,
-      },
-      {
-        path: "/reports",
-        element: <Reports />,
-      },
-      {
-        path: "/create-category",
-        element: <Category />,
-      },
-      {
-        path: "/reports-overview",
-        element: <ReportsOverview></ReportsOverview>,
-      },
-      {
-        path: "/terms-and-condition",
-        element: <TermsAndCondition />,
-      },
-      {
-        path: "/post-management",
-        element: <PostManagement />,
-      },
-      {
-        path: "/post-overview",
-        element: <PostOverview />,
-      },
-      {
-        path: "/notification",
-        element: <Notification />,
-      },
-      {
-        path: "/post-overview-chart",
-        element: <RevenueChart />,
-      },
-      {
-        path: "/faq",
-        element: <FaqPage />,
+        path: "/",
+        element: <AdminLayout></AdminLayout>,
+        children: [
+          {
+            path: "",
+            element: <Dashboard />,
+          },
+          {
+            path: "/users",
+            element: <Users />,
+          },
+          {
+            path: "/Tasker-information/:id",
+            element: <TaskerInformation />,
+          },
+          {
+            path: "/poster-information/:id",
+            element: <PosterInformation />,
+          },
+          {
+            path: "/users",
+            element: <Users />,
+          },
+          {
+            path: "/reports",
+            element: <Reports />,
+          },
+          {
+            path: "/create-category",
+            element: <Category />,
+          },
+          {
+            path: "/reports-overview",
+            element: <ReportsOverview></ReportsOverview>,
+          },
+          {
+            path: "/terms-and-condition",
+            element: <TermsAndCondition />,
+          },
+          {
+            path: "/post-management",
+            element: <PostManagement />,
+          },
+          {
+            path: "/post-overview",
+            element: <PostOverview />,
+          },
+          {
+            path: "/notification",
+            element: <Notification />,
+          },
+          {
+            path: "/post-overview-chart",
+            element: <RevenueChart />,
+          },
+          {
+            path: "/faq",
+            element: <FaqPage />,
+          },
+        ],
       },
     ],
   },

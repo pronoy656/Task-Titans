@@ -200,13 +200,16 @@ const FaqPage = () => {
               </div>
             ))}
 
-            <div className="flex justify-end pt-4">
+            <div className="flex space-x-6 justify-end pt-4">
               <Button
                 onClick={() => setShowModal(true)}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md flex items-center gap-2"
               >
                 <Plus className="h-4 w-4" />
                 Add More
+              </Button>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md flex items-center gap-2">
+                Save
               </Button>
             </div>
           </CardContent>

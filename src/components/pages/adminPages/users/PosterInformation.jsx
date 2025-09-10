@@ -18,12 +18,12 @@ const PosterInformation = () => {
     const fetchUser = async () => {
       try {
         const response = await fetch(
-          `http://10.10.7.33:5000/api/v1/user/${id}`,
+          `http://10.10.7.109:5000/api/v1/user/${id}`,
           {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTczNTUwODksImV4cCI6MTc1NzQ0MTQ4OX0.u-7QbDqcyXvGwcTV6eMtt4pPpDIOJt7zvU2IDFplWso`,
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmYzMjZlM2EzMmQxYTVjMmU5YmMxNCIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTc1MjY1MzMsImV4cCI6MTc1NzYxMjkzM30.r3-NOKfQfYiLH-ovH8grkBNNvuduk0PIZWKrNBCSpvA`,
             },
           }
         );
@@ -49,12 +49,12 @@ const PosterInformation = () => {
   const handleBlockUser = async () => {
     try {
       const response = await fetch(
-        `http://10.10.7.33:5000/api/v1/user/${userData._id}/block`,
+        `http://10.10.7.109:5000/api/v1/user/${userData._id}/block`,
         {
           method: "PATCH", // or POST, based on your backend
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTczNTUwODksImV4cCI6MTc1NzQ0MTQ4OX0.u-7QbDqcyXvGwcTV6eMtt4pPpDIOJt7zvU2IDFplWso`, // replace with your real token
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmYzMjZlM2EzMmQxYTVjMmU5YmMxNCIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTc1MjY1MzMsImV4cCI6MTc1NzYxMjkzM30.r3-NOKfQfYiLH-ovH8grkBNNvuduk0PIZWKrNBCSpvA`, // replace with your real token
           },
         }
       );
@@ -76,12 +76,12 @@ const PosterInformation = () => {
   const handleUnblockUser = async () => {
     try {
       const response = await fetch(
-        `http://10.10.7.33:5000/api/v1/user/${userData._id}/unblock`,
+        `http://10.10.7.109:5000/api/v1/user/${userData._id}/unblock`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YThhODUxY2FiNDBmMDU1MGViMDQ3MyIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTczNTUwODksImV4cCI6MTc1NzQ0MTQ4OX0.u-7QbDqcyXvGwcTV6eMtt4pPpDIOJt7zvU2IDFplWso`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmYzMjZlM2EzMmQxYTVjMmU5YmMxNCIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTc1MjY1MzMsImV4cCI6MTc1NzYxMjkzM30.r3-NOKfQfYiLH-ovH8grkBNNvuduk0PIZWKrNBCSpvA`,
           },
         }
       );
