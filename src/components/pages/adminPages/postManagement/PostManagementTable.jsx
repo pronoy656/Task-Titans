@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Table, Input } from "antd";
+import { Table, Input, Dropdown } from "antd";
+import { MoreOutlined } from "@ant-design/icons";
 import { useGetAllTasksQuery } from "../../../../redux/features/postManagement/postManagementApi";
-import { Search } from "lucide-react";
+import { Edit, Eye, Search, Trash2 } from "lucide-react";
 
 const PostManagementTable = () => {
   const [page, setPage] = useState(1);
@@ -22,6 +23,27 @@ const PostManagementTable = () => {
     setSearchTerm(search); // Directly update the search term
     setPage(1); // Reset to the first page
   }, [search]); // Runs immediately when `search` changes
+
+  // For dropdown menu
+  const menuItems = [
+    {
+      key: "1",
+      label: (
+        <div className="flex items-center gap-2">
+          <Eye size={16} /> View
+        </div>
+      ),
+    },
+
+    {
+      key: "3",
+      label: (
+        <div className="flex items-center gap-2 text-red-600">
+          <Trash2 size={16} /> Delete
+        </div>
+      ),
+    },
+  ];
 
   // ✅ Table columns
   const columns = [
@@ -56,21 +78,16 @@ const PostManagementTable = () => {
     {
       title: "Action",
       key: "action",
-      render: (_, record) => (
-        <div className="flex gap-2">
-          <button
-            className="px-2 py-1 bg-blue-500 text-white rounded"
-            onClick={() => alert(`Viewing: ${record.title}`)}
-          >
-            View
-          </button>
-          <button
-            className="px-2 py-1 bg-red-500 text-white rounded"
-            onClick={() => alert(`Deleting: ${record.title}`)}
-          >
-            Delete
-          </button>
-        </div>
+      width: 80, // ✅ কলাম ছোট করে দিলাম
+      align: "center", // ✅ আইকনটা সেন্টারে থাকবে
+      render: () => (
+        <Dropdown
+          menu={{ items: menuItems }}
+          trigger={["click"]}
+          placement="bottomRight"
+        >
+          <MoreOutlined style={{ fontSize: 18, cursor: "pointer" }} />
+        </Dropdown>
       ),
     },
   ];
