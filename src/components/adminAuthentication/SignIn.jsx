@@ -35,7 +35,7 @@ const SignIn = () => {
       }).unwrap();
 
       // ✅ Token localStorage এ save করো
-      localStorage.setItem("accessToken", result.token);
+      localStorage.setItem("accessToken", result.data);
 
       dispatch(setUser({ token: result.data }));
 

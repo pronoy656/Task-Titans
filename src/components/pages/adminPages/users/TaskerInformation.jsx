@@ -149,6 +149,7 @@ const TaskerInformation = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
+      const token = localStorage.getItem("accessToken");
       try {
         const response = await fetch(
           `http://10.10.7.109:5000/api/v1/user/${id}`,
@@ -156,7 +157,7 @@ const TaskerInformation = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmYzMjZlM2EzMmQxYTVjMmU5YmMxNCIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTc1MjY1MzMsImV4cCI6MTc1NzYxMjkzM30.r3-NOKfQfYiLH-ovH8grkBNNvuduk0PIZWKrNBCSpvA`, // replace yourToken with your actual token
+              Authorization: `Bearer ${token}`,
             },
           }
         );

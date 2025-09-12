@@ -86,6 +86,7 @@ const Users = () => {
 
   // ✅ Block User
   const handleBlock = async (record) => {
+    const token = localStorage.getItem("accessToken");
     try {
       const res = await fetch(
         `http://10.10.7.33:5000/api/v1/user/${record.userID}/block`,
@@ -93,7 +94,7 @@ const Users = () => {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmYzMjZlM2EzMmQxYTVjMmU5YmMxNCIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTc1MjY1MzMsImV4cCI6MTc1NzYxMjkzM30.r3-NOKfQfYiLH-ovH8grkBNNvuduk0PIZWKrNBCSpvA`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -109,6 +110,7 @@ const Users = () => {
 
   // ✅ Unblock User
   const handleUnblock = async (record) => {
+    const token = localStorage.getItem("accessToken");
     try {
       const res = await fetch(
         `http://10.10.7.109:5000/api/v1/user/${record.userID}/unblock`,
@@ -116,7 +118,7 @@ const Users = () => {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmYzMjZlM2EzMmQxYTVjMmU5YmMxNCIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3NTc1MjY1MzMsImV4cCI6MTc1NzYxMjkzM30.r3-NOKfQfYiLH-ovH8grkBNNvuduk0PIZWKrNBCSpvA`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
