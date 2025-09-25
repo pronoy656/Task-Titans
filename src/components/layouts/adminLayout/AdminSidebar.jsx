@@ -3,8 +3,10 @@ import { MdOutlineGridView } from "react-icons/md";
 import {
   CircleQuestionMark,
   ClipboardCheck,
+  Edit,
   Eye,
   Handshake,
+  Home,
   LogOut,
   User,
   User2Icon,
@@ -45,7 +47,7 @@ const menuItems = [
     label: "Create Category",
     path: "/create-category",
     renderIcon: (isActive) => (
-      <Handshake strokeColor={isActive ? "#EDF8F9" : "#212936"} />
+      <Edit strokeColor={isActive ? "#EDF8F9" : "#212936"} />
     ),
   },
   {
@@ -70,10 +72,10 @@ const menuItems = [
     ),
   },
   {
-    label: "Upload Banner",
+    label: "Edit Home Page",
     path: "/upload-banner",
     renderIcon: (isActive) => (
-      <Eye strokeColor={isActive ? "#EDF8F9" : "#212936"} />
+      <Home strokeColor={isActive ? "#EDF8F9" : "#212936"} />
     ),
   },
   {

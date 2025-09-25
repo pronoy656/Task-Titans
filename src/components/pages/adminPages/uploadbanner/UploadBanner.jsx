@@ -378,26 +378,63 @@ const UploadBanner = () => {
   };
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-3xl mx-auto space-y-9">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-foreground mb-2">
-            Banner Image Upload Field
-          </h1>
-          <p className="text-muted-foreground">
-            Upload exactly 2 images with drag & drop, preview, and validation
-          </p>
-        </div>
-
-        <Card className="p-6 shadow-md">
+    <div className="admin-page p-2">
+      <div className=" space-y-9">
+        <Card className="p-2">
           <CardHeader>
-            <CardTitle className="text-xl">Upload Your Images</CardTitle>
-            <CardDescription className="mb-3 mt-1.5">
-              Select two image files to upload. Supports JPEG, PNG, GIF, and
-              WebP formats up to 5MB.
-            </CardDescription>
+            <CardTitle className="text-3xl border-b-2 w-50">
+              Hero Section
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
+            <div className="grid grid-cols-2 gap-4 mt-6">
+              <div className="flex flex-col">
+                <label className="mb-2 font-medium text-gray-800">
+                  Subheader
+                </label>
+                <input
+                  type="text"
+                  placeholder="Please enter subheader "
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div className="flex flex-col">
+                <label className="mb-2 font-medium text-gray-800">Header</label>
+                <input
+                  type="text"
+                  placeholder="Please enter header"
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col mt-4">
+              <label className="mb-2 text-sm font-medium text-gray-700">
+                Description
+              </label>
+              <textarea
+                placeholder="Please enter description"
+                className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              ></textarea>
+            </div>
+            <div className="flex flex-col">
+              <label className="mb-2 font-medium text-gray-800">Rating</label>
+              <input
+                type="text"
+                placeholder="Please enter rating"
+                className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="mb-2 font-medium text-gray-800">
+                Please enter response time
+              </label>
+              <input
+                type="text"
+                placeholder="Please enter response time "
+                className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="image-upload" className="text-sm">
                 Upload Images
@@ -498,6 +535,336 @@ const UploadBanner = () => {
               </div>
             )}
 
+            {/* Counter Section */}
+            <div>
+              <header className="text-3xl font-bold border-b-2 w-60">
+                Counter Section
+              </header>
+              <div className="grid grid-cols-2 gap-4 mt-6">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Active Users
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter active users "
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Paid to Titans
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter paid to titans"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-6">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Success Rate
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter success rate "
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    User Rating
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter user rating"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+            </div>
+            {/* How It Works Section */}
+            <div>
+              <header className="text-3xl font-bold mb-6 border-b-2 w-80">
+                How It Works Section
+              </header>
+              <div className="flex flex-col">
+                <label className="mb-2 text-lg font-medium text-gray-800">
+                  Change Icon 1 ( From Lucide Icon )
+                </label>
+                <input
+                  type="text"
+                  placeholder="Please enter component name from lucide Icon"
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Heading 1
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter heading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Subheading 1
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter subheading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col mt-6">
+                <label className="mb-2 text-lg  font-medium text-gray-800">
+                  Change Icon 2 ( From Lucide Icon )
+                </label>
+                <input
+                  type="text"
+                  placeholder="Please enter component name from lucide Icon"
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Heading 2
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter heading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Subheading 2
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter subheading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col mt-6">
+                <label className="mb-2 text-lg  font-medium text-gray-800">
+                  Change Icon 3 ( From Lucide Icon )
+                </label>
+                <input
+                  type="text"
+                  placeholder="Please enter component name from lucide Icon"
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Heading 3
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter heading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Subheading 3
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter subheading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col mt-6">
+                <label className="mb-2 text-lg  font-medium text-gray-800">
+                  Change Icon 4 ( From Lucide Icon )
+                </label>
+                <input
+                  type="text"
+                  placeholder="Please enter component name from lucide Icon"
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Heading 4
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter heading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Subheading 4
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter subheading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+            </div>
+            {/* Why Choose Task Titans Section */}
+            <div>
+              <header className="text-3xl font-bold mb-5 border-b-2 w-120">
+                Why Choose Task Titans Section
+              </header>
+              <div className="flex flex-col">
+                <label className="mb-2 text-lg font-medium text-gray-800">
+                  Change Icon 1 ( From Lucide Icon )
+                </label>
+                <input
+                  type="text"
+                  placeholder="Please enter component name from lucide Icon"
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Heading 1
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter heading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Subheading 1
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter subheading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col mt-6">
+                <label className="mb-2 text-lg  font-medium text-gray-800">
+                  Change Icon 2 ( From Lucide Icon )
+                </label>
+                <input
+                  type="text"
+                  placeholder="Please enter component name from lucide Icon"
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Heading 2
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter heading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Subheading 2
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter subheading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col mt-6">
+                <label className="mb-2 text-lg  font-medium text-gray-800">
+                  Change Icon 3 ( From Lucide Icon )
+                </label>
+                <input
+                  type="text"
+                  placeholder="Please enter component name from lucide Icon"
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Heading 3
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter heading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Subheading 3
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter subheading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col mt-6">
+                <label className="mb-2 text-lg  font-medium text-gray-800">
+                  Change Icon 4 ( From Lucide Icon )
+                </label>
+                <input
+                  type="text"
+                  placeholder="Please enter component name from lucide Icon"
+                  className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Heading 4
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter heading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-2 font-medium text-gray-800">
+                    Subheading 4
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Please enter subheading"
+                    className="w-full pl-2 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+            </div>
             <Button
               onClick={handleSubmit}
               className="w-full"
@@ -505,42 +872,6 @@ const UploadBanner = () => {
             >
               Submit Form
             </Button>
-          </CardContent>
-        </Card>
-        <Card className="p-4 shadow-md">
-          {" "}
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold">Features</CardTitle>{" "}
-          </CardHeader>{" "}
-          <CardContent>
-            {" "}
-            <ul className="space-y-4 text-sm mt-3">
-              {" "}
-              <li className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-black  rounded-full" />
-                Drag and drop support{" "}
-              </li>{" "}
-              <li className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-black  rounded-full" />
-                Image preview with remove option{" "}
-              </li>{" "}
-              <li className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-black  rounded-full" />
-                File type and size validation{" "}
-              </li>{" "}
-              <li className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-black  rounded-full" />
-                Customizable accepted formats and size limits{" "}
-              </li>{" "}
-              <li className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-black  rounded-full" />
-                Accessible with proper labels and ARIA attributes
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-black rounded-full" /> Error handling
-                with user-friendly messages
-              </li>
-            </ul>
           </CardContent>
         </Card>
       </div>

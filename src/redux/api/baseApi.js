@@ -4,7 +4,7 @@ import { logOut, setUser } from "../features/auth/authSlice";
 // 1. Basic fetchBaseQuery setup
 const baseQuery = fetchBaseQuery({
   // baseUrl: `http://10.10.7.33:5000/api/v1/`,
-  baseUrl: `https://hood-does-extraordinary-dealers.trycloudflare.com/api/v1`,
+  baseUrl: `https://folders-itself-supply-citation.trycloudflare.com/api/v1`,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState()?.auth?.token;
