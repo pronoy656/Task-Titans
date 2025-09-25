@@ -70,6 +70,13 @@ const menuItems = [
     ),
   },
   {
+    label: "Upload Banner",
+    path: "/upload-banner",
+    renderIcon: (isActive) => (
+      <Eye strokeColor={isActive ? "#EDF8F9" : "#212936"} />
+    ),
+  },
+  {
     label: "FAQ",
     path: "/faq",
     renderIcon: (isActive) => (

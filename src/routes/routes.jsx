@@ -19,6 +19,7 @@ import RevenueChart from "../components/pages/adminPages/revenuechart/RevenueCha
 import FaqPage from "../components/pages/adminPages/faq/FaqPage";
 import Category from "../components/pages/adminPages/Category/Category";
 import ProtectedRoute from "../components/protectedRoute/ProtectedRoute";
+import UploadBanner from "../components/pages/adminPages/uploadbanner/UploadBanner";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
           {
             path: "/faq",
             element: <FaqPage />,
+          },
+          {
+            path: "/upload-banner",
+            element: <UploadBanner />,
           },
         ],
       },
