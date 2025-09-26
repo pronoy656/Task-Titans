@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 const Category = () => {
   // Local state for form
   const [categories, setCategories] = useState([
-    { id: 1, categoryName: "", description: "" },
+    { id: 1, categoryName: "", description: "", icon: "" },
   ]);
 
   // RTK Query hooks
@@ -39,6 +39,7 @@ const Category = () => {
       const newCategory = {
         name: categories[0].categoryName,
         description: categories[0].description,
+        icon: categories[0].icon, // ✅ এখন icon যোগ হলো
       };
 
       const res = await createCategory(newCategory).unwrap();
@@ -168,19 +169,15 @@ const Category = () => {
                 </div>
                 <div>
                   <label className="block font-medium text-gray-700 mb-2">
-                    {index + 1}. Image URL
+                    {index + 1}. Icon
                   </label>
                   <textarea
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                    rows="2"
-                    placeholder="Enter category name"
-                    value={category.categoryName}
+                    rows="1"
+                    placeholder="Enter icon name (e.g. ArrowBigUp)"
+                    value={category.icon}
                     onChange={(e) =>
-                      handleInputChange(
-                        category.id,
-                        "categoryName",
-                        e.target.value
-                      )
+                      handleInputChange(category.id, "icon", e.target.value)
                     }
                   />
                 </div>
