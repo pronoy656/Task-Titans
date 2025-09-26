@@ -228,9 +228,11 @@ const Category = () => {
             {fetchedCategories?.data?.map((cat) => (
               <Card key={cat._id} className="bg-white border-0 p-3">
                 <CardContent className="p-0">
+                  <p className="border w-7 h-7 rounded-full p-5">{cat.icon}</p>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     {cat.name}
                   </h3>
+
                   <p className="text-gray-600 text-sm leading-relaxed">
                     {cat.description}
                   </p>
