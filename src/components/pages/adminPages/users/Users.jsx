@@ -6,7 +6,7 @@ import { Table } from "antd";
 import {
   useGetUsersQuery,
   useGetUsersStatsQuery,
-} from "../../../../redux/features/users/usersapi";
+} from "../../../../redux/features/users/usersApi";
 import { useNavigate } from "react-router-dom";
 
 const Users = () => {
@@ -113,7 +113,7 @@ const Users = () => {
     const token = localStorage.getItem("accessToken");
     try {
       const res = await fetch(
-        `http://10.10.7.109:5000/api/v1/user/${record.userID}/unblock`,
+        `${import.meta.env.VITE_BASE_URL}/user/${record.userID}/unblock`,
         {
           method: "PATCH",
           headers: {

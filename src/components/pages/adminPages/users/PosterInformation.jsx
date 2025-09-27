@@ -21,7 +21,7 @@ const PosterInformation = () => {
         const token = localStorage.getItem("accessToken");
 
         const response = await fetch(
-          `http://10.10.7.109:5000/api/v1/user/${id}`,
+          `${import.meta.env.VITE_BASE_URL}/user/${id}`,
           {
             method: "GET",
             headers: {
@@ -53,7 +53,7 @@ const PosterInformation = () => {
     const token = localStorage.getItem("accessToken");
     try {
       const response = await fetch(
-        `http://10.10.7.109:5000/api/v1/user/${userData._id}/block`,
+        `${import.meta.env.VITE_BASE_URL}/user/${userData._id}/block`,
         {
           method: "PATCH", // or POST, based on your backend
           headers: {
