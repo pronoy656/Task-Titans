@@ -670,6 +670,9 @@ import {
   MoreVertical,
   Eye,
   AlertTriangle,
+  BarChart,
+  AlertTriangleIcon,
+  FileTextIcon,
 } from "lucide-react";
 import { Card } from "../../../ui/Card";
 import { CardContent } from "../../../ui/CardContent";
@@ -697,21 +700,27 @@ const Reports = () => {
   const metrics = [
     {
       title: "Total Reports",
-      value: statsData?.data?.allReports?.total || 0,
-      growth: statsData?.data?.allReports?.formattedGrowth || "0%",
+      value: statsData?.data?.allReports?.total ?? 0,
+      growth: statsData?.data?.allReports?.formattedGrowth ?? "0%",
       icon: UserCheck,
     },
     {
       title: "Resolved Reports",
-      value: statsData?.data?.resolved?.total || 0,
-      growth: statsData?.data?.resolved?.formattedGrowth || "0%",
-      icon: FileText,
+      value: statsData?.data?.resolved?.total ?? 0,
+      growth: statsData?.data?.resolved?.formattedGrowth ?? "0%",
+      icon: FileTextIcon,
     },
     {
       title: "Pending Reports",
-      value: statsData?.data?.pending?.total || 0,
-      growth: statsData?.data?.pending?.formattedGrowth || "0%",
-      icon: AlertTriangle,
+      value: statsData?.data?.pending?.total ?? 0,
+      growth: statsData?.data?.pending?.formattedGrowth ?? "0%",
+      icon: AlertTriangleIcon,
+    },
+    {
+      title: "Reviewed Reports", // ✅ নতুন ফিল্ড যুক্ত করলাম
+      value: statsData?.data?.reviewed?.total ?? 0,
+      growth: statsData?.data?.reviewed?.formattedGrowth ?? "0%",
+      icon: BarChart, // যেকোনো icon বসাতে পারো (lucide-react থেকে)
     },
   ];
 
@@ -885,7 +894,7 @@ const Reports = () => {
   return (
     <div className="admin-page p-4">
       {/* Metrics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
         {metrics.map((metric, index) => (
           <Card key={index} className="bg-white shadow-sm border-0">
             <CardContent className="p-4">

@@ -30,7 +30,7 @@ import {
 } from "../../../ui/Select";
 
 // ✅ Import API hooks
-// import { useGetMonthlyRevenueQuery } from "../../../../redux/features/dashBoardChart/revenueApi";
+
 import { useGetCompletionStatsQuery } from "../../../../redux/features/dashBoardChart/taskCompletionRateChart";
 import { useGetUserDistributionQuery } from "../../../../redux/features/dashBoardChart/userDistributionChart";
 import { useGetMonthlyRevenueQuery } from "../../../../redux/features/dashBoardChart/revenueChart";
@@ -96,8 +96,8 @@ const Chart = () => {
   // ✅ Transform API data for Recharts
   const revenueData =
     revenueDataAPI?.data?.map((item) => ({
-      month: item.month.slice(0, 3).toUpperCase(), // "January" → "JAN"
-      value: item.totalRevenue,
+      month: item?.label || "", // "Jan", "Feb", ...
+      value: item?.totalRevenue ?? 0,
     })) || [];
 
   const taskData =

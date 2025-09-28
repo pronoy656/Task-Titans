@@ -29,26 +29,27 @@ const Users = () => {
 
   const stats = statsData?.data || {};
 
+  // Metrics Cards (from stats API)
   const metrics = [
     {
       title: "Total Users",
-      value: stats.allUsers?.total || 0,
-      growth: stats.allUsers?.formattedGrowth || "0%",
-      growthType: stats.allUsers?.growthType || "neutral",
+      value: stats?.allUsers?.total ?? 0,
+      growth: stats?.allUsers?.formattedGrowth ?? "0%",
+      growthType: stats?.allUsers?.growthType ?? "neutral",
       icon: UserCheck,
     },
     {
       title: "Total Taskers",
-      value: stats.taskers?.total || 0,
-      growth: stats.taskers?.formattedGrowth || "0%",
-      growthType: stats.taskers?.growthType || "neutral",
+      value: stats?.taskers?.total ?? 0,
+      growth: stats?.taskers?.formattedGrowth ?? "0%",
+      growthType: stats?.taskers?.growthType ?? "neutral",
       icon: UserCheck,
     },
     {
       title: "Total Posters",
-      value: stats.posters?.total || 0,
-      growth: stats.posters?.formattedGrowth || "0%",
-      growthType: stats.posters?.growthType || "neutral",
+      value: stats?.posters?.total ?? 0,
+      growth: stats?.posters?.formattedGrowth ?? "0%",
+      growthType: stats?.posters?.growthType ?? "neutral",
       icon: FileText,
     },
   ];

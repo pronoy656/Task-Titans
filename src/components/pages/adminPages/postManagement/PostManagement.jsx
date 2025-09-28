@@ -144,7 +144,7 @@ const PostManagement = () => {
   const metrics = [
     {
       icon: <FileText className="w-5 h-5 text-blue-600" />,
-      title: "Total Posts",
+      title: "All Tasks",
       value: stats?.allTasks?.total || 0,
       change: stats?.allTasks?.formattedGrowth || "0%",
       changeType:
@@ -168,7 +168,7 @@ const PostManagement = () => {
     },
     {
       icon: <Clock className="w-5 h-5 text-green-600" />,
-      title: "Total Pending Posts",
+      title: "Total active Posts",
       value: stats?.active?.total || 0,
       change: stats?.active?.formattedGrowth || "0%",
       changeType:
@@ -178,25 +178,25 @@ const PostManagement = () => {
           ? "negative"
           : "neutral",
     },
-    {
-      icon: <XCircle className="w-5 h-5 text-red-600" />,
-      title: "Total Cancel Posts",
-      value: stats?.cancelled?.total || 0,
-      change: stats?.cancelled?.formattedGrowth || "0%",
-      changeType:
-        stats?.cancelled?.growthType === "increase"
-          ? "positive"
-          : stats?.cancelled?.growthType === "decrease"
-          ? "negative"
-          : "neutral",
-    },
+    // {
+    //   icon: <XCircle className="w-5 h-5 text-red-600" />,
+    //   title: "Total Cancel Posts",
+    //   value: stats?.cancelled?.total || 0,
+    //   change: stats?.cancelled?.formattedGrowth || "0%",
+    //   changeType:
+    //     stats?.cancelled?.growthType === "increase"
+    //       ? "positive"
+    //       : stats?.cancelled?.growthType === "decrease"
+    //       ? "negative"
+    //       : "neutral",
+    // },
   ];
 
   return (
     <div className="admin-page">
       <div className="space-y-12">
         {/* Metrics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {metrics.map((metric, index) => (
             <MetricCard
               key={index}
