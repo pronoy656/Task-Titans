@@ -1,6 +1,6 @@
 // src/components/ui/Modal.jsx
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function CustomModal({ isOpen, onClose, children }) {
   if (!isOpen) return null;
 
   const handleBackdropClick = (e) => {
