@@ -6,8 +6,12 @@ import { Input } from "../ui/Input";
 
 import { Button } from "../ui/Button";
 import { useNavigate } from "react-router-dom";
+import { useForgetPasswordMutation } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
+// import { useForgetPasswordMutation } from "../../redux/features/auth/authApi";
 
 const ForgetPassword = () => {
+  const [forgetPassword, { isLoading }] = useForgetPasswordMutation();
+
   // Use Navigate hook for redirect  page
   const navigate = useNavigate();
 
@@ -18,14 +22,27 @@ const ForgetPassword = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Login submitted:", data);
-    // Handle login submission here
+    try {
+      const res = await forgetPassword(data).unwrap();
+      console.log("Response:", res);
 
-    // ✅ Redirect to reset password page
-    navigate("/reset-password");
+      if (res?.success) {
+        alert(res.message);
+        navigate("/get-otp", { state: { email: data.email } });
+      }
+    } catch (error) {
+      console.error("Forget password error:", error);
+      alert(error?.data?.message || "Something went wrong!");
+    }
   };
+
+  if (isLoading) {
+    return (
+      <div>
+        <p>loading..........</p>
+      </div>
+    );
+  }
 
   return (
     <div>

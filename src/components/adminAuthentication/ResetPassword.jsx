@@ -6,11 +6,18 @@ import { Label } from "../ui/Label";
 import { Input } from "../ui/Input";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "../ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
+// import { useResetPasswordMutation } from "../../redux/features/auth/authApi";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  const location = useLocation();
+  const token = location.state?.token;
+  console.log(token);
 
   //UeNavigate hook for redirect the page
   const navigate = useNavigate();
@@ -23,15 +30,30 @@ const ResetPassword = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Password reset submitted:", data);
-    // Handle reset password logic here
+    try {
+      const res = await resetPassword({
+        token,
+        newPassword: data.password,
+        confirmPassword: data.confirmPassword,
+      }).unwrap();
 
-    // ✅ Redirect to Sign In page
-    navigate("/sign-in");
+      if (res?.success) {
+        alert(res.message);
+        navigate("/sign-in");
+      }
+    } catch (error) {
+      console.error("Reset password error:", error);
+      alert(error?.data?.message || "Failed to reset password!");
+    }
   };
 
+  if (isLoading) {
+    return (
+      <div>
+        <p>loading..........</p>
+      </div>
+    );
+  }
   const password = watch("password");
   return (
     <div className="min-h-screen flex items-center justify-center">

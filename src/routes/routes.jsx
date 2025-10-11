@@ -20,6 +20,7 @@ import FaqPage from "../components/pages/adminPages/faq/FaqPage";
 import Category from "../components/pages/adminPages/Category/Category";
 import ProtectedRoute from "../components/protectedRoute/ProtectedRoute";
 import UploadBanner from "../components/pages/adminPages/uploadbanner/UploadBanner";
+import GetOtp from "../components/adminAuthentication/GetOtp";
 
 const router = createBrowserRouter([
   {
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
   {
     path: "/forget-password",
     element: <ForgetPassword />,
+  },
+  {
+    path: "/get-otp",
+    element: <GetOtp />,
   },
   {
     path: "/reset-password",
