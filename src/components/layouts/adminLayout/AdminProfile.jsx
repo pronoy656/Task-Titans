@@ -91,6 +91,7 @@ const AdminProfile = () => {
 
   // ✅ Extract data
   const user = data?.data;
+  console.log(user);
 
   // Default image if user image not found
   const profileImage = user?.image

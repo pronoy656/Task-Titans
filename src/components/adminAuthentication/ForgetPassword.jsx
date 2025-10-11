@@ -6,12 +6,11 @@ import { Input } from "../ui/Input";
 
 import { Button } from "../ui/Button";
 import { useNavigate } from "react-router-dom";
-import { useForgetPasswordMutation } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
+import { forgetPassword } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
+
 // import { useForgetPasswordMutation } from "../../redux/features/auth/authApi";
 
 const ForgetPassword = () => {
-  const [forgetPassword, { isLoading }] = useForgetPasswordMutation();
-
   // Use Navigate hook for redirect  page
   const navigate = useNavigate();
 
@@ -23,7 +22,7 @@ const ForgetPassword = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await forgetPassword(data).unwrap();
+      const res = await forgetPassword(data);
       console.log("Response:", res);
 
       if (res?.success) {
@@ -35,14 +34,6 @@ const ForgetPassword = () => {
       alert(error?.data?.message || "Something went wrong!");
     }
   };
-
-  if (isLoading) {
-    return (
-      <div>
-        <p>loading..........</p>
-      </div>
-    );
-  }
 
   return (
     <div>

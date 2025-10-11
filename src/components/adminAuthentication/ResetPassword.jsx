@@ -7,18 +7,17 @@ import { Input } from "../ui/Input";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "../ui/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useResetPasswordMutation } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
+import { resetPassword } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
+// import { useResetPasswordMutation } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
 // import { useResetPasswordMutation } from "../../redux/features/auth/authApi";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  // const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const location = useLocation();
   const token = location.state?.token;
-  console.log(token);
-
   //UeNavigate hook for redirect the page
   const navigate = useNavigate();
 
@@ -31,11 +30,15 @@ const ResetPassword = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await resetPassword({
+      if (!token) {
+        navigate("/forget-password");
+        return null;
+      }
+      const res = await resetPassword(
         token,
-        newPassword: data.password,
-        confirmPassword: data.confirmPassword,
-      }).unwrap();
+        data.password,
+        data.confirmPassword
+      );
 
       if (res?.success) {
         alert(res.message);
@@ -47,13 +50,6 @@ const ResetPassword = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div>
-        <p>loading..........</p>
-      </div>
-    );
-  }
   const password = watch("password");
   return (
     <div className="min-h-screen flex items-center justify-center">

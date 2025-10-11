@@ -100,11 +100,11 @@ import { Label } from "../ui/Label";
 import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useVerifyEmailOtpMutation } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
-// import { useVerifyEmailOtpMutation } from "../../redux/features/auth/authApi";
+import { verifyOtp } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
+// import { useVerifyEmailOtpMutation } from "../../redux/features/forgetPasswordApi/forgetPasswordApi";
 
 const GetOtp = () => {
-  const [verifyOtp, { isLoading }] = useVerifyEmailOtpMutation();
+  //   const [verifyOtp, { isLoading }] = useVerifyEmailOtpMutation();
   const location = useLocation();
   const email = location.state?.email;
   // Use Navigate hook for redirect page
@@ -118,15 +118,13 @@ const GetOtp = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await verifyOtp({
-        email,
-        oneTimeCode: Number(data.otp),
-      }).unwrap();
-      console.log(res.token);
+      const res = await verifyOtp(email, Number(data.otp));
+      console.log(res);
+      console.log(res.data);
       if (res?.success) {
         alert(res.message);
         // ✅ Navigate to reset page with token
-        navigate("/reset-password", { state: { token: res.token } });
+        navigate("/reset-password", { state: { token: res.data } });
       }
     } catch (error) {
       console.error("OTP verification failed:", error);
@@ -134,13 +132,6 @@ const GetOtp = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div>
-        <p>loading..........</p>
-      </div>
-    );
-  }
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-3xl">

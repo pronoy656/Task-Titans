@@ -1,45 +1,54 @@
-// src/redux/features/auth/authApi.js
-import { baseApi } from "../../api/baseApi";
+const serverBaseUrl = `${import.meta.env.VITE_BASE_URL}`;
 
-export const authApi = baseApi.injectEndpoints({
-  endpoints: (builder) => ({
-    // ✅ Step 1: Forget Password
-    forgetPassword: builder.mutation({
-      query: (data) => ({
-        url: "/auth/forget-password",
-        method: "POST",
-        body: data,
-        credentials: "include",
-      }),
-    }),
+const handleResponse = async (response) => {
+  const result = await response.json();
+  if (!response.ok) {
+    throw new Error(result.message || "Something went wrong!");
+  }
+  return result;
+};
 
-    // ✅ Step 2: Verify Email (OTP)
-    verifyEmailOtp: builder.mutation({
-      query: (data) => ({
-        url: "/auth/verify-email",
-        method: "POST",
-        body: data,
-        credentials: "include",
-      }),
-    }),
+export const forgetPassword = async (data) => {
+  try {
+    const response = await fetch(`${serverBaseUrl}/auth/forget-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    return handleResponse(response);
+  } catch (error) {
+    console.error("Forget password error:", error);
+    throw error;
+  }
+};
 
-    // ✅ Step 3: Reset Password
-    resetPassword: builder.mutation({
-      query: ({ token, ...data }) => ({
-        url: "/auth/reset-password",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-        body: data,
-      }),
-    }),
-  }),
-});
+export const verifyOtp = async (email, oneTimeCode) => {
+  try {
+    const response = await fetch(`${serverBaseUrl}/auth/verify-email`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, oneTimeCode }),
+    });
+    return handleResponse(response);
+  } catch (error) {
+    console.error("OTP verification error:", error);
+    throw error;
+  }
+};
 
-export const {
-  useForgetPasswordMutation,
-  useVerifyEmailOtpMutation,
-  useResetPasswordMutation,
-} = authApi;
+export const resetPassword = async (token, newPassword, confirmPassword) => {
+  try {
+    const response = await fetch(`${serverBaseUrl}/auth/reset-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify({ newPassword, confirmPassword }),
+    });
+    return handleResponse(response);
+  } catch (error) {
+    console.error("Reset password error:", error);
+    throw error;
+  }
+};
