@@ -18,6 +18,7 @@ import {
   useGetReportsQuery,
   useGetReportsStatsQuery,
 } from "../../../../redux/features/reports/reportApi";
+import { useNavigate } from "react-router-dom";
 
 const Reports = () => {
   const [page, setPage] = useState(1);
@@ -64,6 +65,7 @@ const Reports = () => {
   // Action dropdown state
   const [actionDropdown, setActionDropdown] = useState(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+  const navigate = useNavigate();
 
   const handleActionClick = (e, key) => {
     e.stopPropagation();
@@ -75,7 +77,8 @@ const Reports = () => {
     setActionDropdown(actionDropdown === key ? null : key);
   };
   const handleView = (record) => {
-    alert(`View report: ${record.title}`);
+    navigate(`/reports-overview/${record.reportID}`);
+    // alert(`View report: ${record.title}`);
     setActionDropdown(null);
   };
 

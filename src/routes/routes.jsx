@@ -60,7 +60,7 @@ const router = createBrowserRouter([
             element: <Category />,
           },
           {
-            path: "/reports-overview",
+            path: "/reports-overview/:id",
             element: <ReportsOverview></ReportsOverview>,
           },
           {
