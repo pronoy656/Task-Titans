@@ -21,7 +21,20 @@ const categoryApi = baseApi.injectEndpoints({
         credentials: "include",
       }),
     }),
+
+    // ✅ Delete Category
+    deleteCategory: builder.mutation({
+      query: (categoryId) => ({
+        url: `/categories/${categoryId}`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useCreateCategoryMutation, useGetCategoriesQuery } = categoryApi;
+export const {
+  useCreateCategoryMutation,
+  useGetCategoriesQuery,
+  useDeleteCategoryMutation,
+} = categoryApi;
