@@ -43,7 +43,6 @@ const Category = () => {
   };
 
   // ✅ Save category using RTK Query POST
-
   const saveCategories = async () => {
     try {
       const newCategory = {
@@ -73,7 +72,7 @@ const Category = () => {
     setShowModal(true);
   };
 
-  // Perform Delete
+  // handle Delete
   const handleDelete = async () => {
     try {
       const res = await deleteCategory(categoryToDelete).unwrap();
@@ -93,278 +92,6 @@ const Category = () => {
   };
 
   return (
-    // <div className="admin-page">
-    //   <div className="max-w-8xl mx-auto">
-    //     {/* Create Category Form */}
-    //     <Card className="shadow-sm p-6">
-    //       <CardHeader className="pb-4">
-    //         <CardTitle className="text-3xl font-semibold text-gray-800">
-    //           Create Category
-    //         </CardTitle>
-    //       </CardHeader>
-
-    //       <CardContent className="space-y-6">
-    //         {categories.map((category, index) => (
-    //           <div key={category.id} className="space-y-4">
-    //             <div>
-    //               <label className="block font-medium text-gray-700 mb-2">
-    //                 {index + 1}. Category Name
-    //               </label>
-    //               <textarea
-    //                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-    //                 rows="2"
-    //                 placeholder="Enter category name"
-    //                 value={category.categoryName}
-    //                 onChange={(e) =>
-    //                   handleInputChange(
-    //                     category.id,
-    //                     "categoryName",
-    //                     e.target.value
-    //                   )
-    //                 }
-    //               />
-    //             </div>
-    //             <div>
-    //               <label className="block font-medium text-gray-700 mb-2">
-    //                 {index + 1}. Icon
-    //               </label>
-    //               <textarea
-    //                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-    //                 rows="1"
-    //                 placeholder="Enter icon name (e.g. ArrowBigUp)"
-    //                 value={category.icon}
-    //                 onChange={(e) =>
-    //                   handleInputChange(category.id, "icon", e.target.value)
-    //                 }
-    //               />
-    //             </div>
-
-    //             <div>
-    //               <label className="block font-medium text-gray-700 mb-2">
-    //                 {index + 1}. Description
-    //               </label>
-    //               <textarea
-    //                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-    //                 rows="3"
-    //                 placeholder="Enter description"
-    //                 value={category.description}
-    //                 onChange={(e) =>
-    //                   handleInputChange(
-    //                     category.id,
-    //                     "description",
-    //                     e.target.value
-    //                   )
-    //                 }
-    //               />
-    //             </div>
-
-    //             {index < categories.length - 1 && (
-    //               <hr className="border-gray-200 my-6" />
-    //             )}
-    //           </div>
-    //         ))}
-
-    //         <div className="flex justify-end pt-4">
-    //           <Button
-    //             onClick={saveCategories}
-    //             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
-    //           >
-    //             Save
-    //           </Button>
-    //         </div>
-    //       </CardContent>
-    //     </Card>
-    //   </div>
-
-    //   {/* Show fetched categories */}
-    //   <div className="mt-12">
-    //     <div className="max-w-7xl mx-auto">
-    //       {isLoading && <p>Loading categories...</p>}
-    //       {isError && <p>Failed to load categories</p>}
-    //       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-    //         {fetchedCategories?.data?.map((cat) => (
-    //           <Card
-    //             key={cat._id}
-    //             className="p-6 shadow-sm  hover:shadow-lg transition-shadow"
-    //           >
-    //             <CardContent className="p-0 space-y-4">
-    //               {/* Icon Container */}
-    //               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-    //                 {LucideIcons[cat.icon] ? (
-    //                   React.createElement(LucideIcons[cat.icon], {
-    //                     className: "w-8 h-8 text-blue-600",
-    //                   })
-    //                 ) : (
-    //                   <LucideIcons.HelpCircle className="w-8 h-8 text-gray-400" /> // fallback if icon not found
-    //                 )}
-    //               </div>
-
-    //               {/* Content */}
-    //               <div className="space-y-2">
-    //                 <h3 className="text-xl font-semibold text-foreground">
-    //                   {cat.name}
-    //                 </h3>
-    //                 <p className="text-muted-foreground leading-relaxed">
-    //                   {cat.description}
-    //                 </p>
-    //               </div>
-    //             </CardContent>
-    //           </Card>
-    //         ))}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-
-    // <div className="admin-page">
-    //   <div className="max-w-8xl mx-auto">
-    //     {/* Create Category Form */}
-    //     <Card className="shadow-sm p-6">
-    //       <CardHeader className="pb-4">
-    //         <CardTitle className="text-3xl font-semibold text-gray-800">
-    //           Create Category
-    //         </CardTitle>
-    //       </CardHeader>
-
-    //       <CardContent className="space-y-6">
-    //         {categories.map((category, index) => (
-    //           <div key={category.id} className="space-y-4">
-    //             {/* Name */}
-    //             <div>
-    //               <label className="block font-medium text-gray-700 mb-2">
-    //                 {index + 1}. Category Name
-    //               </label>
-    //               <textarea
-    //                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 resize-none"
-    //                 rows="2"
-    //                 placeholder="Enter category name"
-    //                 value={category.categoryName}
-    //                 onChange={(e) =>
-    //                   handleInputChange(
-    //                     category.id,
-    //                     "categoryName",
-    //                     e.target.value
-    //                   )
-    //                 }
-    //               />
-    //             </div>
-
-    //             {/* Icon */}
-    //             <div>
-    //               <label className="block font-medium text-gray-700 mb-2">
-    //                 Icon
-    //               </label>
-    //               <textarea
-    //                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 resize-none"
-    //                 rows="1"
-    //                 placeholder="Enter icon name (e.g. lucid icon)"
-    //                 value={category.icon}
-    //                 onChange={(e) =>
-    //                   handleInputChange(category.id, "icon", e.target.value)
-    //                 }
-    //               />
-    //             </div>
-
-    //             {/* Description */}
-    //             <div>
-    //               <label className="block font-medium text-gray-700 mb-2">
-    //                 Description
-    //               </label>
-    //               <textarea
-    //                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 resize-none"
-    //                 rows="3"
-    //                 placeholder="Enter description"
-    //                 value={category.description}
-    //                 onChange={(e) =>
-    //                   handleInputChange(
-    //                     category.id,
-    //                     "description",
-    //                     e.target.value
-    //                   )
-    //                 }
-    //               />
-    //             </div>
-    //           </div>
-    //         ))}
-
-    //         <div className="flex justify-end pt-4">
-    //           <Button
-    //             onClick={saveCategories}
-    //             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
-    //           >
-    //             Save
-    //           </Button>
-    //         </div>
-    //       </CardContent>
-    //     </Card>
-    //   </div>
-
-    //   {/* Show Fetched Categories */}
-    //   <div className="mt-12">
-    //     <div className="max-w-7xl mx-auto">
-    //       {isLoading && <p>Loading categories...</p>}
-    //       {isError && <p>Failed to load categories</p>}
-    //       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-    //         {fetchedCategories?.data?.map((cat) => (
-    //           <Card key={cat._id} className="p-6 shadow-sm hover:shadow-lg">
-    //             <CardContent className="p-0 space-y-4">
-    //               {/* Icon */}
-    //               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-    //                 {LucideIcons[cat.icon] ? (
-    //                   React.createElement(LucideIcons[cat.icon], {
-    //                     className: "w-8 h-8 text-blue-600",
-    //                   })
-    //                 ) : (
-    //                   <LucideIcons.HelpCircle className="w-8 h-8 text-gray-400" />
-    //                 )}
-    //               </div>
-
-    //               {/* Content */}
-    //               <div className="space-y-2">
-    //                 <h3 className="text-xl font-semibold">{cat.name}</h3>
-    //                 <p className="text-gray-600">{cat.description}</p>
-    //               </div>
-
-    //               {/* Delete Button */}
-    //               <Button
-    //                 onClick={() => confirmDelete(cat._id)}
-    //                 className="bg-red-600 hover:bg-red-700 text-white w-full"
-    //               >
-    //                 Delete
-    //               </Button>
-    //             </CardContent>
-    //           </Card>
-    //         ))}
-    //       </div>
-    //     </div>
-    //   </div>
-
-    //   {/* ✅ Delete Confirmation Modal */}
-    //   {showModal && (
-    //     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    //       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
-    //         <h2 className="text-xl font-semibold mb-4">
-    //           Are you sure you want to delete this?
-    //         </h2>
-    //         <div className="flex justify-end space-x-4">
-    //           <Button
-    //             onClick={() => setShowModal(false)}
-    //             className="bg-gray-300 hover:bg-gray-400 text-gray-800"
-    //           >
-    //             Cancel
-    //           </Button>
-    //           <Button
-    //             onClick={handleDelete}
-    //             className="bg-red-600 hover:bg-red-700 text-white"
-    //           >
-    //             Yes, Delete
-    //           </Button>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )}
-    // </div>
-
     <div className="admin-page">
       <div className="max-w-8xl mx-auto">
         {/* Create Category Form */}
@@ -451,7 +178,13 @@ const Category = () => {
       {/* Show Fetched Categories */}
       <div className="mt-12">
         <div className="max-w-7xl mx-auto">
-          {isLoading && <p>Loading categories...</p>}
+          {isLoading && (
+            <div className="flex flex-col justify-center items-center h-40">
+              <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-3"></div>
+              <p className="text-gray-500 text-sm">Loading categories...</p>
+            </div>
+          )}
+
           {isError && <p>Failed to load categories</p>}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {fetchedCategories?.data?.map((cat) => (

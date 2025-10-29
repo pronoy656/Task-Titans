@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Search, UserCheck, FileText } from "lucide-react";
 import { Card } from "../../../ui/Card";
 import { CardContent } from "../../../ui/CardContent";
-import { Table } from "antd";
+import { Skeleton, Table } from "antd";
 import {
   useGetUsersQuery,
   useGetUsersStatsQuery,
@@ -289,8 +289,39 @@ const Users = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [actionDropdown]);
 
+  // ✅ SKELETON LOADING
   if (isLoading || statsLoading) {
-    return <div className="p-4">Loading users...</div>;
+    return (
+      <div className="p-2 space-y-6">
+        {/* Skeleton metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {Array(3)
+            .fill(0)
+            .map((_, i) => (
+              <Card key={i} className="bg-white shadow-sm border-0">
+                <CardContent className="p-4">
+                  <Skeleton active paragraph={false} title={{ width: "80%" }} />
+                  <div className="mt-3">
+                    <Skeleton.Input active style={{ width: 120 }} />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+        </div>
+
+        {/* Skeleton search */}
+        <Skeleton.Input
+          active
+          block
+          style={{ height: 40, borderRadius: 8, marginTop: 10 }}
+        />
+
+        {/* Skeleton table */}
+        <div className="border border-[#F0F0F0] rounded-lg shadow-sm mt-6 p-4">
+          <Skeleton active paragraph={{ rows: 8 }} />
+        </div>
+      </div>
+    );
   }
 
   return (

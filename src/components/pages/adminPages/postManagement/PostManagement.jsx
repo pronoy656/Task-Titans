@@ -137,7 +137,14 @@ function MetricCard({ icon, title, value, change, changeType }) {
 const PostManagement = () => {
   const { data, isLoading } = useGetTaskStatsQuery();
 
-  if (isLoading) return <p>Loading stats...</p>;
+  {
+    isLoading && (
+      <div className="flex flex-col justify-center items-center h-40">
+        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-3"></div>
+        <p className="text-gray-500 text-sm">Post Management...</p>
+      </div>
+    );
+  }
 
   const stats = data?.data;
 
